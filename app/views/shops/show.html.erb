@@ -1,0 +1,5 @@
+<%= link_to  "Back to shops", shops_path %>
+<h1><%= @shop.name %> <%= link_to  icon('fas', 'edit'), edit_shop_path(@shop) %></h1>
+
+<p><%= @shop.address.city %></p>
+<p><%= @shop.description %></p>

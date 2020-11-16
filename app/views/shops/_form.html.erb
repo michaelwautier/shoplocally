@@ -1,0 +1,14 @@
+<%= simple_form_for @shop do |f| %>
+  <%= f.input :name %>
+  <%= f.input :description %>
+  <%= f.input :vat_number %>
+  <label for="street">Street</label>
+  <input type="text" name="street" value="<%= @shop.address&.street %>">
+  <label for="number">Number</label>
+  <input type="text" name="number" value="<%= @shop.address&.number %>">
+  <label for="postcode">Zipcode</label>
+  <input type="text" name="postcode" value="<%= @shop.address&.postcode %>">
+  <label for="city">City</label>
+  <input type="text" name="city" value="<%= @shop.address&.city %>">
+  <%= f.submit %>
+<% end %>

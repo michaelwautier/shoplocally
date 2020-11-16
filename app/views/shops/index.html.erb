@@ -1,0 +1,7 @@
+<h1>All shop <%= link_to icon('fas', 'plus'), new_shop_path %></h1>
+
+<ul>
+  <% @shops.each do |shop| %>
+    <li><%= link_to shop.name, shop_path(shop) %></li>
+  <% end %>
+</ul>
