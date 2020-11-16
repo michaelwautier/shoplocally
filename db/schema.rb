@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_16_165832) do
+ActiveRecord::Schema.define(version: 2020_11_16_195622) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,16 @@ ActiveRecord::Schema.define(version: 2020_11_16_165832) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "delivery_options", force: :cascade do |t|
+    t.bigint "shop_id", null: false
+    t.float "free_delivery_from"
+    t.float "delivery_cost"
+    t.float "express_delivery_cost"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["shop_id"], name: "index_delivery_options_on_shop_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -85,6 +95,7 @@ ActiveRecord::Schema.define(version: 2020_11_16_165832) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "delivery_options", "shops"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "shops"
   add_foreign_key "shops", "addresses"
