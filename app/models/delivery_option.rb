@@ -1,0 +1,2 @@
+class DeliveryOption < ApplicationRecord
+end
