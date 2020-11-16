@@ -2,12 +2,13 @@ class ShopsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
 
   def index
-    @shops = Shop.all
+    @shops = policy_scope(Shop).all
   end
 
   def new
     @address = Address.new
     @shop = Shop.new
+    authorize @shop
   end
 
   def show
