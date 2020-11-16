@@ -1,0 +1,3 @@
+<h1>Products#show <%= link_to  icon('fas', 'edit'), edit_shop_product_path(@product.shop, @product) %> <%= link_to  icon('fas', 'trash-alt'), product_path(@product) , method: :delete, data: { confirm: "Are you sure ?"} %></h1>
+
+<p><%= @product.name %></p>
