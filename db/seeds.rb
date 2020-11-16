@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+puts "Creating vehicles..."
+Vehicle.destroy_all
+Vehicle::TYPES.each do |type|
+  Vehicle.create(type_name: type)
+end
+puts "Vehicles created"
