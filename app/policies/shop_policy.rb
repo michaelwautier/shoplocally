@@ -1,14 +1,21 @@
 class ShopPolicy < ApplicationPolicy
+  def new?
+    user.present?
+  end
+
+  def create?
+    user.present?
+  end
+
+  def update?
+    record.user == user
+  end
+
+  def destroy?
+    false
+    # TODO: only site admin
+  end
   class Scope < Scope
-    def update?
-      record.user == user
-    end
-
-    def destroy?
-      false
-      # TODO: only site admin
-    end
-
     def resolve
       scope.all
     end
