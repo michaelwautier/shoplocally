@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: 'shops#index'
-  resources :shops
+  resources :shops do
+    resources :products, except: [:destroy, :update]
+  end
+  resources :products, only: [:destroy, :update]
   resources :addresses
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

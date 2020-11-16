@@ -1,0 +1,11 @@
+<h1>Products#new</h1>
+<%= simple_form_for [@shop, @product] do |f| %>
+  <%= f.input :name %>
+  <%= f.input :description %>
+  <%= f.input :price %>
+  <%= f.input :stock %>
+  <%= f.input :ean %>
+  <%= f.input :tax %>
+  <%= f.input :category, collection: Category.all %>
+  <%= f.submit %>
+<% end %>
