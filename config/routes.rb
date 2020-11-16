@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'shops#index'
   resources :shops do
     resources :products, except: [:destroy, :update]
-    resources :delivery_option, only: [:index, :new, :create, :edit]
+    resources :delivery_options, only: [:index, :new, :create, :edit]
   end
   resources :products, only: [:destroy, :update]
   resources :delivery_options, only: [:destroy, :update]
