@@ -1,5 +1,16 @@
 <h1> Cart details </h1>
 
 <% @cart.cart_products.each do |cart_product| %>
-  <%= cart_product.product.name %>
+  <div class="card p-2">
+    <div class="card-title">
+      <%= link_to cart_product.product.name, shop_product_path(cart_product.product.shop, cart_product.product) %>
+    </div>
+    <div class="card-body">
+      <p><%= cart_product.product.description %>  </p>
+      <p><%= cart_product.quantity  %> x <%= cart_product.product.price %> € = <%= cart_product.quantity * cart_product.product.price %></p>
+
+      <%= link_to 'Remove', remove_from_cart_path(cart_product), method: :delete, data: { confirm: 'Are you sure?'} %>
+    </div>
+  </div>
+  
 <% end %>
