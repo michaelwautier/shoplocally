@@ -3,7 +3,12 @@ require 'json'
 class Shop < ApplicationRecord
   belongs_to :address
   belongs_to :user
-  belongs_to :deliveryOption
+  has_one :deliveryOption
+  has_one_attached :logo
+  has_many_attached :pictures
+
+  has_many :products
+
 
   validates :name, presence: true, length: { minimum: 2 }, uniqueness: true
   validates :description, presence: true, length: { minimum: 20 }

@@ -1,5 +1,21 @@
 <%= link_to  "Back to shops", shops_path %>
-<h1><%= @shop.name %> <%= link_to  icon('fas', 'edit'), edit_shop_path(@shop) %></h1>
-<h2>Shop details</h2>
-<p><%= @shop.address.city %></p>
-<p><%= @shop.description %></p>
+
+<% if @shop.logo.attached? %>
+  <%= cl_image_tag @shop.logo.key, height: 300, width: 400, crop: :fill %>
+<% end %>
+
+<% if @shop.pictures.attached? %>  
+  <% @shop.pictures.each do |photo| %>
+    <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+  <% end %>
+<% end %>
+
+<div class="jumbotron">
+  <h1 class="display-4"><%= @shop.name %> <%= link_to  icon('fas', 'edit'), edit_shop_path(@shop) if current_user == @shop.user %></h1>
+  <p class="lead"><%= @shop.description %></p>
+  <hr class="my-4">
+  <p><%= @shop.address.city %></p>
+</div>
+
+<%= render 'products/products', products: @shop.products %>
+

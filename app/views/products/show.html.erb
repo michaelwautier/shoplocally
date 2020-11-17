@@ -1,3 +1,17 @@
-<h1>Products#show <%= link_to  icon('fas', 'edit'), edit_shop_product_path(@product.shop, @product) %> <%= link_to  icon('fas', 'trash-alt'), product_path(@product) , method: :delete, data: { confirm: "Are you sure ?"} %></h1>
+<h1>
+  Products#show
+</h1>
+<% if @product.photos.attached? %>  
+  <% @product.photos.each do |photo| %>
+    <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+  <% end %>
+<% end %>
+  <% if @product.shop.user == current_user%>
+    <%= link_to  icon('fas', 'edit'), edit_shop_product_path(@product.shop, @product) %> <%= link_to  icon('fas', 'trash-alt'), product_path(@product) , method: :delete, data: { confirm: "Are you sure ?"} %></h1>
+  <% end %>
 
 <p><%= @product.name %></p>
+<p><%= @product.description %></p>
+<p><%= @product.price %> €</p>
+<p><%= @product.stock %> in stock</p>
+<p><%= @product.tax %> %</p>
