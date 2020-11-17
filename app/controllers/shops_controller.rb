@@ -1,12 +1,13 @@
 class ShopsController < ApplicationController
   def index
     @shops = Shop.all
+    # @addresses = Address.where(street: @shops.each { |shop| shop.address.street })
     @addresses = Address.all
-    @markers = @addresses.geocoded.map do |address|
+    @markers = @shops.map do |shop|
       {
-       lat: address.latitude,
-       lng: address.longitude,
-       infoWindow: render_to_string(partial: "info_window", locals: { address: address })
+       lat: shop.address.latitude,
+       lng: shop.address.longitude,
+       infoWindow: render_to_string(partial: "info_window", locals: { shop: shop })
       }
     end
   end

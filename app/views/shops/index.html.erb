@@ -1,20 +1,22 @@
 <h1>All shop <%= link_to icon('fas', 'plus'), new_shop_path %></h1>
 
-<ul>
+
   <% @shops.each do |shop| %>
-    <li><%= link_to shop.name, shop_path(shop) %></li>
+    <%= link_to shop_path(shop) do %>
+      <div class="card-shop">
+        <% if shop.logo.attached? %>
+          <%= cl_image_tag shop.logo.key, height: 150, width: 150, crop: :fill, class: "shop-logo" %>
+        <% elsif shop.pictures.attached? %>
+           <%= cl_image_tag shop.pictures.first.key, height: 150, width: 150, crop: :fill, class: "shop-picture" %>
+        <% end %>
+        <div class="card-shop-infos">
+          <h2><%= shop.name %></h2>
+          <p><%= shop.description %></p>
+          <p><%= shop.address.full_address %></p>
+        </div>
+      </div>
+    <% end %>
   <% end %>
-</ul>
-<div class="card-shop">
-  <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
-  <div class="card-shop-infos">
-    <h2>Shop name</h2>
-    <p>Shop description with <strong>relevant info</strong> only.</p>
-    <p>Location</p>
-  </div>
-</div>
-
-
 
 <div id="map"
      style="width: 100%; height: 600px;"
