@@ -6,7 +6,7 @@ const initMapbox = () => {
   const fitMapToMarkers = (map, markers) => {
   const bounds = new mapboxgl.LngLatBounds();
   markers.forEach(marker => bounds.extend([ marker.lng, marker.lat ]));
-  map.fitBounds(bounds, { padding: 70, maxZoom: 1500, duration: 30000 });
+  map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 30000 });
 };
 
   if (mapElement) { // only build a map if there's a div#map to inject into
@@ -24,6 +24,8 @@ const initMapbox = () => {
         .setPopup(popup)
         .addTo(map);
     });
+    fitMapToMarkers(map, markers);
+    map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken, mapboxgl: mapboxgl }));
   }
 };
 
