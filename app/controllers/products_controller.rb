@@ -43,6 +43,17 @@ class ProductsController < ApplicationController
     redirect_to shop_products_path(@product.shop)
   end
 
+  def add_to_cart
+    if current_user.carts.where(current_cart: true).empty?
+      cart = Cart.new
+      cart.user = current_user
+      cart.save
+    else
+      cart = current_user.carts.where(current_cart: true)
+    end
+    Cart_product.
+  end
+
   private
 
   def product_params
