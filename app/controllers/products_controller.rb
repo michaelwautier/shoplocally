@@ -45,15 +45,15 @@ class ProductsController < ApplicationController
   end
 
   def add_to_cart
-    if current_user.carts.where(current_cart: true).empty?
+    unless current_user.carts.find_by(current_cart: true)
       cart = Cart.new
       cart.user = current_user
       cart.save
     else
-      cart = current_user.carts.where(current_cart: true)
+      cart = current_user.carts.find_by(current_cart: true)
     end
     @product = Product.find(params[:id])
-    cart_product = Cart_product.new(product_id: @product.id, product_price: @product.price, product_tax: @product.tax, quantity: 1)
+    cart_product = CartProduct.new(product_id: @product.id, product_price: @product.price, product_tax: @product.tax, quantity: 1)
     cart_product.cart = cart
     cart_product.save
   end

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :products, except: [:destroy, :update]
     resources :delivery_options, only: [:index, :new, :create, :edit]
   end
+  post "products/:id", to: "products#add_to_cart", as: "add_to_cart"
   resources :products, only: [:destroy, :update]
   resources :delivery_options, only: [:destroy, :update]
   resources :addresses
