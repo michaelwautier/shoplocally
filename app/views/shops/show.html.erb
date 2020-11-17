@@ -1,5 +1,16 @@
 <%= link_to  "Back to shops", shops_path %>
+<% if @shop.logo.attached? %>
+  <%= cl_image_tag @shop.logo.key, height: 300, width: 400, crop: :fill %>
+<% end %>
+
 <h1><%= @shop.name %> <%= link_to  icon('fas', 'edit'), edit_shop_path(@shop) %></h1>
+
+<% if @shop.pictures.attached? %>  
+  <% @shop.pictures.each do |photo| %>
+    <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+  <% end %>
+<% end %>
+
 <h2>Shop details</h2>
 <p><%= @shop.address.city %></p>
 <p><%= @shop.description %></p>

@@ -10,5 +10,7 @@
   <input type="text" name="postcode" value="<%= @shop.address&.postcode %>">
   <label for="city">City</label>
   <input type="text" name="city" value="<%= @shop.address&.city %>">
+  <%= f.input :logo, as: :file %>
+  <%= f.input :pictures, as: :file, input_html: { multiple: true } %>
   <%= f.submit %>
 <% end %>
