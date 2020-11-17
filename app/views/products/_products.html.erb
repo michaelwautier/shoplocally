@@ -1,3 +1,4 @@
+<%= link_to  icon('fas', 'plus'), new_shop_product_path(@shop) %>
 <ul>
   <% products.each do |product| %>
     <li><%= link_to product.name, shop_product_path(product.shop, product) %> <%= link_to icon('fas', 'cart-plus'), add_to_cart_path(product), method: :post%> </li>
