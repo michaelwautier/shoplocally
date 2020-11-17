@@ -2,6 +2,7 @@ class Product < ApplicationRecord
   belongs_to :shop
   belongs_to :category
   has_many :cart_products
+  has_many_attached :photos
 
   validates :name, presence: true, length: { minimum: 2 }
   validates :description, presence: true, length: { minimum: 20 }
