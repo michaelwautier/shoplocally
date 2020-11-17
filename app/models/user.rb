@@ -7,6 +7,7 @@ class User < ApplicationRecord
   belongs_to :address, optional: true
   belongs_to :vehicle, optional: true
   has_many   :carts
+  has_many   :deliveries
 
   validates :first_name, length: { minimum: 2 }, presence: true, on: [:update]
   validates :last_name, length: { minimum: 2 }, presence: true, on: [:update]
