@@ -1,11 +1,20 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <%= link_to "/", class: "navbar-brand" do %>
-    <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
-    <% end %>
+    SHOP LOCALLY
+  <% end %>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+
+  <div class="d-flex align-items-center">
+    <div class="search-form-control">
+      <input class="form-control string required" type="text" name="search[query]" id="search_query" />
+      <button name="button" type="submit" class="btn btn-flat magnified-icon">
+        <i class="fas fa-search"></i>
+      </button>
+    </div>
+  </div>
 
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -28,6 +37,9 @@
             <%= link_to "Another action", "#", class: "dropdown-item" %>
             <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
           </div>
+        </li>
+        <li class="nav-item">
+          <%= image_tag "shopping-cart-logo.png", size: "50x50", class: "nav-link" %>
         </li>
       <% else %>
         <li class="nav-item">
