@@ -50,7 +50,6 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     if cart_product = cart.cart_products.find_by(product_id: @product.id)
       cart_product.increment(:quantity)
-      raise
     else
       cart_product = CartProduct.new(product_id: @product.id, product_price: @product.price, product_tax: @product.tax, quantity: 1)
     end
