@@ -1,3 +1,14 @@
-
-<h2><%= Shop.find_by(address: address).name %></h2>
-<p><%= address.full_address %></p>
+    <%= link_to shop_path(shop) do %>
+      <div class="card-shop">
+        <% if shop.logo.attached? %>
+          <%= cl_image_tag shop.logo.key, height: 150, width: 150, crop: :fill, class: "shop-logo" %>
+        <% elsif shop.pictures.attached? %>
+           <%= cl_image_tag shop.pictures.first.key, height: 150, width: 150, crop: :fill, class: "shop-picture" %>
+        <% end %>
+        <div class="card-shop-infos">
+          <h2><%= shop.name %></h2>
+          <p><%= shop.description %></p>
+          <p><%= shop.address.full_address %></p>
+        </div>
+      </div>
+    <% end %>
