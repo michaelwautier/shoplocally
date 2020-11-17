@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   def index
+    @shop = Shop.find(params[:shop_id])
     @products = Product.where(shop_id: params[:shop_id])
   end
 
@@ -51,7 +52,10 @@ class ProductsController < ApplicationController
     else
       cart = current_user.carts.where(current_cart: true)
     end
-    Cart_product.
+    @product = Product.find(params[:id])
+    cart_product = Cart_product.new(product_id: @product.id, product_price: @product.price, product_tax: @product.tax, quantity: 1)
+    cart_product.cart = cart
+    cart_product.save
   end
 
   private
