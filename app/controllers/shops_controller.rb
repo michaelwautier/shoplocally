@@ -1,6 +1,14 @@
 class ShopsController < ApplicationController
   def index
     @shops = Shop.all
+    @addresses = Address.all
+    @markers = @addresses.geocoded.map do |address|
+      {
+       lat: address.latitude,
+       lng: address.longitude,
+       infoWindow: render_to_string(partial: "info_window", locals: { address: address })
+      }
+    end
   end
 
   def new
