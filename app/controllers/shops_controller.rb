@@ -1,9 +1,7 @@
 class ShopsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index]
-  skip_after_action :verify_authorized, only: %i[show new]
 
   def index
-    @shops = policy_scope(Shop).all
+    @shops = Shop.all
   end
 
   def new
@@ -24,7 +22,6 @@ class ShopsController < ApplicationController
       postcode: params[:postcode],
       city: params[:city]
     )
-    authorize @shop
     if @shop.save
       redirect_to shop_path(@shop)
     else
@@ -34,12 +31,10 @@ class ShopsController < ApplicationController
 
   def edit
     @shop = Shop.find(params[:id])
-    authorize @shop
   end
 
   def update
     @shop = Shop.find(params[:id])
-    authorize @shop
     @shop.address.update(
       street: params[:street],
       number: params[:number],
