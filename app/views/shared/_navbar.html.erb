@@ -9,10 +9,12 @@
 
   <div class="d-flex align-items-center">
     <div class="search-form-control">
-      <input class="form-control string required" type="text" name="search[query]" id="search_query" />
-      <button name="button" type="submit" class="btn btn-flat magnified-icon">
+      <%= form_tag shops_path, id: "secret", class: "d-flex align-items-center", method: :get do %>
+        <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Search for products, shops or category"%>
+        <%= button_tag(type: "submit", class: "btn btn-flat magnified-icon") do %>
         <i class="fas fa-search"></i>
-      </button>
+        <% end %>
+      <% end %>
     </div>
   </div>
 
@@ -32,7 +34,7 @@
           </div>
         </li>
         <li class="nav-item">
-          <%= link_to  icon('fas', 'shopping-cart'), "#", class: "text-white" %>
+          <%= link_to  icon('fas', 'shopping-cart'), current_cart_path, class: "text-white" %>
         </li>
       <% else %>
         <li class="nav-item">

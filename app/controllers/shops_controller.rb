@@ -1,7 +1,14 @@
 class ShopsController < ApplicationController
   def index
-    @shops = Shop.all
-    # @addresses = Address.where(street: @shops.each { |shop| shop.address.street })
+    if params[:query].present?
+      sql_query = " \
+        shops.name ILIKE :query \
+        OR products.name ILIKE :query \
+        "
+      @shops = Shop.joins(:products).where(sql_query, query: "%#{params[:query]}%")
+    else
+      @shops = Shop.all
+    end
     @addresses = Address.all
     @markers = @shops.map do |shop|
       {
