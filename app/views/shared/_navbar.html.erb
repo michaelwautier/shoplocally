@@ -18,14 +18,8 @@
 
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav mr-auto d-flex align-items-center pr-3">
       <% if user_signed_in? %>
-        <li class="nav-item active">
-          <%= link_to "Home", "#", class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Messages", "#", class: "nav-link" %>
-        </li>
         <li class="nav-item dropdown">
           <% if current_user.avatar.attached? %>
             <%= cl_image_tag current_user.avatar.key, id: "navbarDropdown", class: "rounded-circle avatar dropdown-toggle", data: { toggle: "dropdown"}%>
@@ -33,13 +27,12 @@
             <img class="avatar dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="<%=asset_path 'noavatar.png' %>" />
           <%end%>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <%= link_to "Action", "#", class: "dropdown-item" %>
-            <%= link_to "Another action", "#", class: "dropdown-item" %>
+            <%= link_to "Dashboard", "#", class: "dropdown-item" %>
             <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
           </div>
         </li>
         <li class="nav-item">
-          <%= image_tag "shopping-cart-logo.png", size: "40x40", class: "nav-link" %>
+          <%= link_to  icon('fas', 'shopping-cart'), "#", class: "text-white" %>
         </li>
       <% else %>
         <li class="nav-item">
