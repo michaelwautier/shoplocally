@@ -1,11 +1,9 @@
 class ShopsController < ApplicationController
   def index
     if params[:query].present?
-      sql_query = " \
-        shops.name ILIKE :query \
-        OR products.name ILIKE :query \
-        "
-      @shops = Shop.joins(:products).where(sql_query, query: "%#{params[:query]}%")
+      sql_query = "name ILIKE :query"
+      @shops = Shop.where(sql_query, query: "%#{params[:query]}%")
+      @products = Product.where(sql_query, query: "%#{params[:query]}%")
     else
       @shops = Shop.all
     end

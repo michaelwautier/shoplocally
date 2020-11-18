@@ -1,5 +1,7 @@
 <h1>All shops near you <%= link_to icon('fas', 'plus'), new_shop_path %></h1>
-
+<% @products.each do |product| %>
+  <%= product.name %>
+<% end %>
 <div class="row">
   <% @shops.each do |shop| %>
     <div class="col-12 col-md-6 col-xl-3 mb-4">
