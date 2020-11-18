@@ -35,7 +35,11 @@
   <div class="tab-pane fade" id="nav-shipping" role="tabpanel" aria-labelledby="nav-shipping-tab">
     <div class="p-4">
       <%= simple_form_for @address, url: cart_checkout_path, method: :post do |f| %>
-        <%= check_box_tag(:use_user_address) %> <span>Use this address: <strong><%= current_user.address.full_address %></strong></span>
+        <% if current_user.address %>
+          <%= check_box_tag(:use_user_address) %> <span>Use this address: <strong><%= current_user.address.full_address %></strong></span>
+        <% else %>
+          <%= check_box_tag(:save_user_address) %>  <span>Save this address</span>
+        <% end %>
         <hr>
         <%= f.input :street %>
         <%= f.input :number %>
