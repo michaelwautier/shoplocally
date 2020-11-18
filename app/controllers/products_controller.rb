@@ -46,16 +46,20 @@ class ProductsController < ApplicationController
   end
 
   def add_to_cart
-    cart = current_cart
     @product = Product.find(params[:id])
-    if cart_product = cart.cart_products.find_by(product_id: @product.id)
-      cart_product.increment(:quantity)
-    else
-      cart_product = CartProduct.new(product_id: @product.id, product_price: @product.price, product_tax: @product.tax, quantity: 1)
+    unless @product.stock <= 0
+      cart = current_cart
+      @product.stock -= 1
+      @product.save
+      if cart_product = cart.cart_products.find_by(product_id: @product.id)
+        cart_product.increment(:quantity)
+      else
+        cart_product = CartProduct.new(product_id: @product.id, product_price: @product.price, product_tax: @product.tax, quantity: 1)
+      end
+      cart_product.cart = cart
+      cart_product.save
+      redirect_to current_cart_path, notice: 'Product added to cart!'
     end
-    cart_product.cart = cart
-    cart_product.save
-    redirect_to current_cart_path, notice: 'Product added to cart!'
   end
 
   def remove_from_cart
@@ -66,6 +70,9 @@ class ProductsController < ApplicationController
       cart_product.decrement(:quantity)
       cart_product.save
     end
+    @product = Product.find(cart_product[:product_id])
+    @product.stock += 1
+    @product.save
     redirect_to current_cart_path, notice: 'Product removed from cart!'
   end
 
