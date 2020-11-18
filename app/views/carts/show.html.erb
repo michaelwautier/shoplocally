@@ -1,4 +1,4 @@
-<h1> Cart details <%= link_to 'Proceed to checkout', cart_checkout_path, class: "btn btn-outline-success" %></h1>
+<h1> Cart details <%= link_to 'Proceed to checkout', cart_checkout_path, class: "btn btn-outline-success" if @cart.cart_products.count > 0 %></h1>
 
 
 <% @cart.cart_products.each do |cart_product| %>
