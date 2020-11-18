@@ -47,7 +47,7 @@ class ProductsController < ApplicationController
 
   def add_to_cart
     @product = Product.find(params[:id])
-    unless @product.stock <= 0
+    if @product.stock > 0
       cart = current_cart
       @product.stock -= 1
       @product.save
@@ -59,6 +59,8 @@ class ProductsController < ApplicationController
       cart_product.cart = cart
       cart_product.save
       redirect_to current_cart_path, notice: 'Product added to cart!'
+    else
+      redirect_to current_cart_path, notice: 'Product out of stock!'
     end
   end
 
