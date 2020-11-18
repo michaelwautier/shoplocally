@@ -2,12 +2,9 @@
   border-radius: 5px;
   overflow: hidden;
   img {
-    max-height: 250px;
+    height: 175px;
+    object-fit: cover;
   }
-}
-
-.shop-info {
-  background-color: #eaeaea;
 }
 
 .rating-stars {
