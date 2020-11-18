@@ -1,10 +1,10 @@
 .shop-header {
   border-radius: 5px;
   overflow: hidden;
-}
-
-.shop-info {
-  background-color: #eaeaea;
+  img {
+    height: 175px;
+    object-fit: cover;
+  }
 }
 
 .rating-stars {

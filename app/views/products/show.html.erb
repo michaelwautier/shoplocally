@@ -1,19 +1,45 @@
+<%= link_to "Back to #{@product.shop.name} products", shop_path(@product.shop) %>
 <h1>
-  Products#show
-</h1>
-<% if @product.photos.attached? %>
-  <% @product.photos.each do |photo| %>
-    <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
-  <% end %>
-<% end %>
+  <%= @product.name %>
   <% if @product.shop.user == current_user%>
     <%= link_to  icon('fas', 'edit'), edit_shop_product_path(@product.shop, @product) %> <%= link_to  icon('fas', 'trash-alt'), product_path(@product) , method: :delete, data: { confirm: "Are you sure ?"} %></h1>
   <% end %>
+</h1>
 
-<p><%= @product.name %></p>
-<p><%= @product.description %></p>
-<p><%= @product.price %> €</p>
-<p><%= @product.stock %> in stock</p>
-<p><%= @product.tax %> %</p>
+<div class="product-header">
+  <div class="row">
+    <div class="col-3 pr-0">
+      <% if @product.photos.attached? %>
+        <%= cl_image_tag @product.photos.first.key, class: "w-100" %>
+      <% else %>
+        <img class="w-100" src="https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081" alt="">
+      <% end %>
+    </div>
+    <div class="col-9">
+      <div class="row p-3 bg-gray h-100">
+        <div class="col-8 d-flex align-items-center">
+          <p class="m-0"><%= @product.description %></p>
+        </div>
+        <div class="col-4 border-left border-white text-center d-flex flex-column justify-content-center">
+          <h3><%= @product.price %>€</h3>
+          <p><%= @product.stock %> in stock</p>
+          <%= button_to "Add to cart", add_to_cart_path(@product), method: :post, class: "btn cart-button" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<%= link_to icon('fas', 'cart-plus'), add_to_cart_path(@product), method: :post%>
+<h2 class="my-4">See other products from <%= @product.shop.name %></h2>
+
+<div class="bg-gray p-3">
+  <div class="row">
+    <% @product.shop.products.each do |product| %>
+      <div class="col-12 col-md-4">
+        <%= render 'products/product_card', product: product %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
