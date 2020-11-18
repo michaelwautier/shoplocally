@@ -32,9 +32,9 @@
         </div>
         <div class="col-2">
           <p>
-          <%= link_to icon('fas', 'minus-circle'), remove_from_cart_path(cart_product), method: :delete, data: { confirm: 'Are you sure?'} %> 
+          <%= link_to icon('fas', 'minus-circle'), remove_from_cart_path(cart_product), method: :delete, data: { confirm: 'Are you sure?'}, remote: true %> 
           <%= cart_product.quantity  %> 
-          <%= link_to icon('fas', 'plus-circle'), add_to_cart_path(cart_product.product), method: :post %></p>        
+          <%= link_to icon('fas', 'plus-circle'), add_to_cart_path(cart_product.product), method: :post, remote: true %></p>        
         </div>
         <div class="col-2">
           <p><%= cart_product.product.price %>€</p>
