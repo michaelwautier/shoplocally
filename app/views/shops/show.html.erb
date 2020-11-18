@@ -1,21 +1,37 @@
 <%= link_to  "Back to shops", shops_path %>
-<div class="d-flex">
-  <div class="shop-image">
-  <% if @shop.logo.attached? %>
-    <%= cl_image_tag @shop.logo.key, height: 300, width: 400, crop: :fill %>
-  <% elsif @shop.pictures.attached? %>
-    <% @shop.pictures.each do |photo| %>
-      <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
-    <% end %>
-  <% end %>
-  </div>
-  <div class="jumbotron">
-    <h1 class="display-4"><%= @shop.name %> <%= link_to  icon('fas', 'edit'), edit_shop_path(@shop) if current_user == @shop.user %></h1>
-    <p class="lead"><%= @shop.description %></p>
-    <hr class="my-4">
-    <p><%= @shop.address.city %></p>
+<h1><%= @shop.name %> <%= link_to  icon('fas', 'edit'), edit_shop_path(@shop) if current_user == @shop.user %></h1>
+<div class="shop-header">
+  <div class="row">
+    <div class="col-3 pr-0">
+      <% if @shop.logo.attached? %>
+        <%= cl_image_tag @shop.logo.key, class: "w-100" %>
+      <% elsif @shop.pictures.attached? %>
+        <% @shop.pictures.each do |photo| %>
+          <%= cl_image_tag photo.key, class: "w-100" %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-9">
+      <div class="row p-3 shop-info h-100">
+        <div class="col-8 d-flex align-items-center">
+          <p class="m-0"><%= @shop.description %></p>
+        </div>
+        <div class="col-4 border-left border-white text-center d-flex flex-column justify-content-center">
+          <p>Customers reviews</p>
+          <div class="rating-stars">
+            <%= icon('fas', 'star') %>
+            <%= icon('fas', 'star') %>
+            <%= icon('fas', 'star') %>
+            <%= icon('fas', 'star') %>
+            <%= icon('far', 'star') %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+<h2 class="my-4 pb-2 border-bottom">Best sellers from <%= @shop.name %></h2>
 <%= render 'products/products', products: @shop.products %>
 
 <div class="product-card">
