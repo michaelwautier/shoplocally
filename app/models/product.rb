@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+  TAXES = [6, 12, 21]
   belongs_to :shop
   belongs_to :category
   has_many :cart_products
