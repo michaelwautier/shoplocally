@@ -1,6 +1,27 @@
-<%= link_to  icon('fas', 'plus'), new_shop_product_path(@shop) %>
-<ul>
+<%= link_to  icon('fas', 'plus', 'Add a product'), new_shop_product_path(@shop) %>
+
+<div class="row mt-4">
   <% products.each do |product| %>
-    <li><%= link_to product.name, shop_product_path(product.shop, product) %> <%= link_to icon('fas', 'cart-plus'), add_to_cart_path(product), method: :post%> </li>
+    <div class="col-12 col-md-6 col-xl-4">
+      <%= link_to shop_product_path(product.shop, product) do %>
+      <div class="product-card">
+        <% if product.photos.attached? %>
+          <%= cl_image_tag product.photos.first.key %>
+        <% else %>
+          <img src="https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081" alt="">
+        <% end %>
+        <div class="row product-card-infos text-dark">
+          <div class="col-10">
+            <h2><%= product.name %></h2>
+            <p><%= product.description %></p>
+          </div>
+          <div class="col-2">
+            <h2 class="product-card-pricing"><%= product.price %>€</h2>
+          </div>
+        </div>
+      </div>
+      <% end %>
+      <%= link_to icon('fas', 'cart-plus'), add_to_cart_path(product), method: :post%>
+    </div>
   <% end %>
-</ul>
+</div>

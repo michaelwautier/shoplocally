@@ -1,6 +1,9 @@
 .shop-header {
   border-radius: 5px;
   overflow: hidden;
+  img {
+    max-height: 250px;
+  }
 }
 
 .shop-info {

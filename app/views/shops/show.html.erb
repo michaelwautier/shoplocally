@@ -9,6 +9,8 @@
         <% @shop.pictures.each do |photo| %>
           <%= cl_image_tag photo.key, class: "w-100" %>
         <% end %>
+      <% else %>
+        <img src="https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081" alt="">
       <% end %>
     </div>
     <div class="col-9">
@@ -33,14 +35,3 @@
 
 <h2 class="my-4 pb-2 border-bottom">Best sellers from <%= @shop.name %></h2>
 <%= render 'products/products', products: @shop.products %>
-
-<div class="product-card">
-  <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
-  <div class="product-card-infos">
-    <div>
-      <h2>Title here</h2>
-      <p>Short description here!</p>
-    </div>
-    <h2 class="product-card-pricing">£99.99</h2>
-  </div>
-</div>

@@ -1,7 +1,11 @@
-.card-trip {
+.product-card {
   overflow: hidden;
   background: white;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  transition: all ease 0.2s;
+  &:hover {
+    transform: scale(1.05);
+  }
 }
 
 .product-card > img {
@@ -29,11 +33,4 @@
   justify-content: space-between;
   align-items: flex-end;
   position: relative;
-}
-
-.product-card-infos .product-card-user {
-  position: absolute;
-  right: 16px;
-  top: -20px;
-  width: 40px;
 }
