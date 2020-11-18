@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post 'products/:id', to: 'products#add_to_cart', as: 'add_to_cart'
   delete 'products/:id', to: 'products#remove_from_cart', as: 'remove_from_cart'
   get 'cart/', to: 'carts#show', as: 'current_cart'
+  get 'cart/checkout/', to: 'carts#checkout', as: 'cart_checkout'
   resources :products, only: [:destroy, :update]
   resources :delivery_options, only: [:destroy, :update]
   resources :addresses

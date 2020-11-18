@@ -1,1 +1,8 @@
-Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
+Target:
+Small shops, entrepeneurs, and customers willing to support them
+
+Pain:
+In the lockdown to come, small businesses lose customers who turn to big corporates
+
+Solution:
+A website/app similar to Amazon, gathering shops and entrepeneurs by cities to be able to shop locally.
