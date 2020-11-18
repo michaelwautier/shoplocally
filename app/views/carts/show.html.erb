@@ -21,7 +21,7 @@
     </div>
   </div>
   <% total_price = 0 %>
-  <% @cart.cart_products.each do |cart_product| %>
+  <% @cart.cart_products.order(created_at: :desc).each do |cart_product| %>
     <div class="list-group-item">
       <div class="row text-right">
         <div class="col-4 text-left">
@@ -37,10 +37,10 @@
           <%= link_to icon('fas', 'plus-circle'), add_to_cart_path(cart_product.product), method: :post %></p>        
         </div>
         <div class="col-2">
-          <p><%= cart_product.product.price %>€</p>
+          <p><%= number_with_precision(cart_product.product.price, precision: 2) %>€</p>
         </div>
         <div class="col-2">
-          <p><%= cart_product.quantity * cart_product.product.price %>€</p>
+          <p><%= number_with_precision(cart_product.quantity * cart_product.product.price, precision: 2) %>€</p>
         </div>        
       </div>
     </div>
@@ -50,7 +50,7 @@
     <div class="row text-right">
       <div class="col-10"></div>
       <div class="col-2">
-        <p>Total: <%= total_price %>€</p>
+        <p>Total: <%= number_with_precision(total_price, precision: 2) %>€</p>
       </div>        
     </div>
   </div>
