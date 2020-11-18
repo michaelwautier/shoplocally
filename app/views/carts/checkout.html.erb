@@ -8,29 +8,61 @@
 </nav>
 <div class="tab-content" id="nav-tabContent">
   <div class="tab-pane fade show active" id="nav-order" role="tabpanel" aria-labelledby="nav-order-tab">
-    <% @cart.cart_products.order(created_at: :desc).each do |cart_product| %>
-      <div class="row p-4">
-        <div class="col bl-light">
-          <%= cart_product.quantity %>
-        </div>
-        <div class="col">
-          <i class="fas fa-times"></i>
-        </div>
-        <div class="col">
-          <%= cart_product.product.name %>
-        </div>
-          
-        <div class="col">
-            <%= cart_product.product_price %>
-        </div>
-        <div class="col">
-          <i class="fas fa-equals"></i>
-        </div>
-        <div class="col">
-          <%= number_with_precision(cart_product.product_price * cart_product.quantity, precision: 2) %>
-        </div>
+    <ul class="list-group list-group-flush border-bottom pb-4">
+  <div class="list-group-item">
+    <div class="row text-right">
+      <div class="col-4 text-left">
+        <p>Product</p>        
       </div>
-    <% end %>
+      <div class="col-2 text-left">
+        <p>Shop</p>        
+      </div>
+      <div class="col-2">
+        <p>Quantity</p>        
+      </div>
+      <div class="col-2">
+        <p>Unit Price</p>
+      </div>
+      <div class="col-2">
+        <p>Total</p>
+      </div>        
+    </div>
+  </div>
+  <% total_price = 0 %>
+  <% @cart.cart_products.order(created_at: :desc).each do |cart_product| %>
+    <div class="list-group-item">
+      <div class="row text-right">
+        <div class="col-4 text-left">
+          <p><%= link_to cart_product.product.name, shop_product_path(cart_product.product.shop, cart_product.product) %></p>        
+        </div>
+        <div class="col-2 text-left">
+          <p><%= cart_product.product.shop.name %></p>        
+        </div>
+        <div class="col-2">
+          <p>
+          
+          <%= cart_product.quantity  %> 
+              
+        </div>
+        <div class="col-2">
+          <p><%= number_with_precision(cart_product.product.price, precision: 2) %>€</p>
+        </div>
+        <div class="col-2">
+          <p><%= number_with_precision(cart_product.quantity * cart_product.product.price, precision: 2) %>€</p>
+        </div>        
+      </div>
+    </div>
+  <% total_price += cart_product.quantity * cart_product.product.price %>
+  <% end %>
+  <div class="list-group-item">
+    <div class="row text-right">
+      <div class="col-10"></div>
+      <div class="col-2">
+        <p>Total: <%= number_with_precision(total_price, precision: 2) %>€</p>
+      </div>        
+    </div>
+  </div>
+</ul>
   </div>
   <div class="tab-pane fade" id="nav-shipping" role="tabpanel" aria-labelledby="nav-shipping-tab">
     <div class="p-4">
