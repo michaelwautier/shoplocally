@@ -1,7 +1,7 @@
 <h1>
   Products#show
 </h1>
-<% if @product.photos.attached? %>  
+<% if @product.photos.attached? %>
   <% @product.photos.each do |photo| %>
     <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
   <% end %>
@@ -15,3 +15,5 @@
 <p><%= @product.price %> €</p>
 <p><%= @product.stock %> in stock</p>
 <p><%= @product.tax %> %</p>
+
+<%= link_to icon('fas', 'cart-plus'), add_to_cart_path(@product), method: :post%>
