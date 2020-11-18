@@ -35,6 +35,8 @@
   <div class="tab-pane fade" id="nav-shipping" role="tabpanel" aria-labelledby="nav-shipping-tab">
     <div class="p-4">
       <%= simple_form_for @address do |f| %>
+        <%= check_box_tag(:use_user_address) %> <span>Use this address: <strong><%= current_user.address.full_address %></strong></span>
+        <hr>
         <%= f.input :street %>
         <%= f.input :number %>
         <%= f.input :postcode %>
@@ -43,9 +45,15 @@
     </div>
   </div>
   <div class="tab-pane fade p-4" id="nav-payment" role="tabpanel" aria-labelledby="nav-payment-tab">
-    
-      <%= select_tag(:payment_id, raw('<option class="p-2" value="1">credit card</option><option class="p-2" value="2">paypall</option><option class="p-2" value="3">bancontact</option>')) %>
-    <%= f.submit 'Pay now', class:"btn btn-outline-success" %>
+    <div class="row p-3">
+      <div class="col">
+        <%= select_tag(:payment_id, raw('<option class="p-2" value="1">credit card</option><option class="p-2" value="2">paypall</option><option class="p-2" value="3">bancontact</option>')) %>
+      </div>
+      <div class="col">
+        <%= f.submit 'Pay now', class:"btn btn-outline-success" %>
+      </div>
+    </div>
+      
     <% end %>
   </div>
 </div>
