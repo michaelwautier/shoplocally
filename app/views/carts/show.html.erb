@@ -1,16 +1,62 @@
-<h1> Cart details <%= link_to 'Proceed to checkout', cart_checkout_path, class: "btn btn-outline-success" if @cart.cart_products.count > 0 %></h1>
+<h2 class="text-uppercase border-bottom pb-3 mb-4">Shopping Cart</h2>
 
-
-<% @cart.cart_products.each do |cart_product| %>
-  <div class="card p-2">
-    <div class="card-title">
-      <%= link_to cart_product.product.name, shop_product_path(cart_product.product.shop, cart_product.product) %>
-    </div>
-    <div class="card-body">
-      <p><%= cart_product.product.description %>  </p>
-      <p><%= cart_product.quantity  %> x <%= cart_product.product.price %> € = <%= cart_product.quantity * cart_product.product.price %></p>
-
-      <%= link_to 'Remove', remove_from_cart_path(cart_product), method: :delete, data: { confirm: 'Are you sure?'} %>
+<ul class="list-group list-group-flush border-bottom pb-4">
+  <div class="list-group-item">
+    <div class="row text-right">
+      <div class="col-4 text-left">
+        <p>Product</p>        
+      </div>
+      <div class="col-2 text-left">
+        <p>Shop</p>        
+      </div>
+      <div class="col-2">
+        <p>Quantity</p>        
+      </div>
+      <div class="col-2">
+        <p>Unit Price</p>
+      </div>
+      <div class="col-2">
+        <p>Total</p>
+      </div>        
     </div>
   </div>
-<% end %>
+  <% total_price = 0 %>
+  <% @cart.cart_products.each do |cart_product| %>
+    <div class="list-group-item">
+      <div class="row text-right">
+        <div class="col-4 text-left">
+          <p><%= link_to cart_product.product.name, shop_product_path(cart_product.product.shop, cart_product.product) %></p>        
+        </div>
+        <div class="col-2 text-left">
+          <p><%= cart_product.product.shop.name %></p>        
+        </div>
+        <div class="col-2">
+          <p>
+          <%= link_to icon('fas', 'minus-circle'), remove_from_cart_path(cart_product), method: :delete, data: { confirm: 'Are you sure?'} %> 
+          <%= cart_product.quantity  %> 
+          <%= link_to icon('fas', 'plus-circle'), add_to_cart_path(cart_product.product), method: :post %></p>        
+        </div>
+        <div class="col-2">
+          <p><%= cart_product.product.price %>€</p>
+        </div>
+        <div class="col-2">
+          <p><%= cart_product.quantity * cart_product.product.price %>€</p>
+        </div>        
+      </div>
+    </div>
+  <% total_price += cart_product.quantity * cart_product.product.price %>
+  <% end %>
+  <div class="list-group-item">
+    <div class="row text-right">
+      <div class="col-10"></div>
+      <div class="col-2">
+        <p>Total: <%= total_price %>€</p>
+      </div>        
+    </div>
+  </div>
+</ul>
+
+<div class="d-flex justify-content-between mt-4">
+  <%= link_to 'Back', :back, class: "btn btn-warning" if @cart.cart_products.count > 0 %>
+  <%= link_to 'Proceed to checkout', cart_checkout_path, class: "btn btn-success" if @cart.cart_products.count > 0 %>
+</div>
