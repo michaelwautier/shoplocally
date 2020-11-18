@@ -8,7 +8,7 @@
 </nav>
 <div class="tab-content" id="nav-tabContent">
   <div class="tab-pane fade show active" id="nav-order" role="tabpanel" aria-labelledby="nav-order-tab">
-    <% @cart.cart_products.each do |cart_product| %>
+    <% @cart.cart_products.order(created_at: :desc).each do |cart_product| %>
       <div class="row p-4">
         <div class="col bl-light">
           <%= cart_product.quantity %>
