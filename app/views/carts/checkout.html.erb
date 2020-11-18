@@ -1,0 +1,51 @@
+
+<nav class="mt-3">
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-link active" id="nav-order-tab" data-toggle="tab" href="#nav-order" role="tab" aria-controls="nav-order" aria-selected="true">Order</a>
+    <a class="nav-link" id="nav-shipping-tab" data-toggle="tab" href="#nav-shipping" role="tab" aria-controls="nav-shipping" aria-selected="false">Shipping</a>
+    <a class="nav-link" id="nav-payment-tab" data-toggle="tab" href="#nav-payment" role="tab" aria-controls="nav-payment" aria-selected="false">Payment</a>
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-order" role="tabpanel" aria-labelledby="nav-order-tab">
+    <% @cart.cart_products.each do |cart_product| %>
+      <div class="row p-4">
+        <div class="col bl-light">
+          <%= cart_product.quantity %>
+        </div>
+        <div class="col">
+          <i class="fas fa-times"></i>
+        </div>
+        <div class="col">
+          <%= cart_product.product.name %>
+        </div>
+          
+        <div class="col">
+            <%= cart_product.product_price %>
+        </div>
+        <div class="col">
+          <i class="fas fa-equals"></i>
+        </div>
+        <div class="col">
+          <%= number_with_precision(cart_product.product_price * cart_product.quantity,precision: 2) %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="tab-pane fade" id="nav-shipping" role="tabpanel" aria-labelledby="nav-shipping-tab">
+    <div class="p-4">
+      <%= simple_form_for @address do |f| %>
+        <%= f.input :street %>
+        <%= f.input :number %>
+        <%= f.input :postcode %>
+        <%= f.input :city %>
+      
+    </div>
+  </div>
+  <div class="tab-pane fade p-4" id="nav-payment" role="tabpanel" aria-labelledby="nav-payment-tab">
+    
+      <%= select_tag(:payment_id, raw('<option class="p-2" value="1">credit card</option><option class="p-2" value="2">paypall</option><option class="p-2" value="3">bancontact</option>')) %>
+    <%= f.submit 'Pay now', class:"btn btn-outline-success" %>
+    <% end %>
+  </div>
+</div>
