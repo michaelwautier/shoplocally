@@ -1,5 +1,5 @@
 <h1>Products#edit</h1>
-<%= simple_form_for [@shop, @product] do |f| %>
+<%= simple_form_for([@shop, @product], remote: true ) do |f| %>
   <%= f.input :name %>
   <%= f.input :description %>
   <%= f.input :price %>
