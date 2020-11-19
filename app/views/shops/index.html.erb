@@ -28,9 +28,9 @@
 <h2>Browse categories</h2>
 
 <div class="row">
-  <% Category::CATEGORIES.each do |category| %>
+  <% Category.all.each do |category| %>
     <div class="col-12 col-md-4 mb-4">
-      <%= link_to "/products/find/#{category}" do %>
+      <%= link_to "categories/#{category.id}" do %>
         <%= render  "categories/card", category: category %>
       <% end %>
     </div>

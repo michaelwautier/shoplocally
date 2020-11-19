@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
 
   # products by category
-  get 'products/find/:category', to: 'products#find'
+  get 'categories/:id', to: 'categories#show'
 
   # shop independent product actions
   post 'products/:id', to: 'products#add_to_cart', as: 'add_to_cart'
