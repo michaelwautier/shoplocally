@@ -4,7 +4,7 @@
   <%= f.input :price %>
   <%= f.input :stock %>
   <%= f.input :ean %>
-  <%= f.input :tax, collection: Product::TAXES, selected: @product.tax.round %>
+  <%= f.input :tax, collection: Product::TAXES, selected: @product.tax&.round %>
   <%= f.input :photos, as: :file, input_html: { multiple: true } %>
   <%= f.input :category, collection: Category.all, selected: @product.category&.id %>
   <%= f.submit %>
