@@ -3,32 +3,10 @@
 <div class="card my-3">
   <h5 class="card-header">Shop: <%= @delivery.shop.name %></h5>
   <div class="card-body">
-      <% @delivery.cart_products.each do |cart_product| %>
-      <% total_price = 0 %>
-    <div class="list-group-item">
-      <div class="row text-right">
-        <div class="col-4 text-left">
-          <p><%= link_to cart_product.product.name, shop_product_path(cart_product.product.shop, cart_product.product) %></p>        
-        </div>
-        <div class="col-2 text-left">
-          <p><%= cart_product.product.shop.name %></p>        
-        </div>
-        <div class="col-2">
-          <p>
-          
-          <%= cart_product.quantity  %> 
-              
-        </div>
-        <div class="col-2">
-          <p><%= number_with_precision(cart_product.product.price, precision: 2) %>€</p>
-        </div>
-        <div class="col-2">
-          <p><%= number_with_precision(cart_product.quantity * cart_product.product.price, precision: 2) %>€</p>
-        </div>        
-      </div>
-    </div>
-  <% total_price += cart_product.quantity * cart_product.product.price %>
-  <% end %>
+    
+    <% @cart_products = @delivery.cart_products %>
+    <% render @cart_products %>
+
     <div class="row mt-3">
       <div class="col">
         <h5 class="card-title"><strong>Status:</strong> <%= @delivery.status %></h5>
@@ -37,14 +15,15 @@
         <p class="card-text"><strong>Type of vehicle:</strong> <%= @delivery.vehicle ? @delivery.vehicle.type : 'Not yet specified' %></p>
       </div>
     </div>
+
     <div class="row">
       <div class="col">
         <p class="card-text"><strong>Shop address:</strong> <%= @delivery.shop.address.full_address %></p>
       </div>
         <div class="col">
           <p class="card-text"><strong>Delivery address:</strong> <%= @delivery.order.user.address.full_address %></P>
+        </div>
       </div>
-    </div>
 
   </div>
 </div>
