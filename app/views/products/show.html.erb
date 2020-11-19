@@ -21,7 +21,7 @@
           <p class="m-0"><%= @product.description %></p>
         </div>
         <div class="col-4 border-left border-white text-center d-flex flex-column justify-content-center">
-          <h3><%= @product.price %>€</h3>
+          <h3><%= number_with_precision(@product.price, precision: 2) %>€</h3>
           <% if @product.stock <= 0 %>
             <p>Sorry, this product is currently out of stock</p>
           <% else %>
@@ -34,8 +34,18 @@
   </div>
 </div>
 
-<h2 class="my-4">See other products from <%= @product.shop.name %></h2>
+<% if @product.photos.attached? %>
+  <section id="product-photos">
+  <% @product.photos.each do |photo| %>
+    <% unless photo == @product.photos.first %>  
+      <%= cl_image_tag photo.key, class: "product-photos" %>
+    <% end %>
+  <% end %>
+  </section>
+<% end %>
 
+
+<h2 class="my-4">See other products from <%= @product.shop.name %></h2>
 <div class="bg-gray p-3">
   <div class="row">
     <% @product.shop.products.each do |product| %>
