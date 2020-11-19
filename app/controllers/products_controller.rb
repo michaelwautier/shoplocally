@@ -5,11 +5,6 @@ class ProductsController < ApplicationController
     @products = Product.where(shop_id: params[:shop_id])
   end
 
-  def find
-    @category = Category.find_by(name: params[:category])
-    @products = Product.where(category: @category)
-  end
-
   def show
     @product = Product.find(params[:id])
   end
@@ -82,11 +77,6 @@ class ProductsController < ApplicationController
     @product.save
     redirect_to current_cart_path, notice: 'Product removed from cart!'
   end
-
-  def find
-    
-  end
-  
 
   private
 
