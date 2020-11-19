@@ -63,7 +63,7 @@ class CartsController < ApplicationController
   def order_to_deliveries(order)
     shops = order.cart.cart_products.map { |line| line.product.shop }
     shops.uniq.each do |shop|
-      deli = Delivery.new(order: order, user: order.cart.user, shop: shop, status: 'Pending')
+      deli = Delivery.new(order: order, shop: shop, status: 'new')
       deli.save!
     end
   end
