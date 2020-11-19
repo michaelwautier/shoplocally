@@ -16,7 +16,7 @@
           <% end %>
           <div class="card-shop-infos text-dark">
             <h2><%= shop.name %></h2>
-            <p><%= shop.description %></p>
+            <p><%= shop.description.length > 40 ? "#{shop.description.first(40)} (...)" : shop.description %></p>
             <p><%= shop.address.full_address %></p>
           </div>
         </div>

@@ -8,9 +8,12 @@
     <div class="product-card-infos">
       <div>
         <h2><%= product.name %></h2>
-        <p><%= product.description %></p>
+        <p><%= product.description.length > 40 ? "#{product.description.first(40)} (...)" : product.description %></p>
       </div>
-      <h2 class="product-card-pricing"><%= product.price %>€ <%= link_to icon('fas', 'cart-plus'), add_to_cart_path(product), method: :post %></h2>
+      <div class="text-right">
+        <h2 class="product-card-pricing"><%= number_with_precision(product.price, precision: 2) %>€</h2>
+         <%= link_to icon('fas', 'cart-plus'), add_to_cart_path(product), method: :post %>
+      </div>
     </div>
   </div>
 <% end %>

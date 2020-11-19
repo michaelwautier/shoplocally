@@ -10,7 +10,7 @@
   <div class="d-flex align-items-center">
     <div class="search-form-control">
       <%= form_tag shops_path, id: "secret", class: "d-flex align-items-center", method: :get do %>
-        <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Search for products, shops or category"%>
+        <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Products, shops, category"%>
         <%= button_tag(type: "submit", class: "btn btn-flat magnified-icon") do %>
         <i class="fas fa-search"></i>
         <% end %>
