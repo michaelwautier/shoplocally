@@ -22,8 +22,12 @@
         </div>
         <div class="col-4 border-left border-white text-center d-flex flex-column justify-content-center">
           <h3><%= @product.price %>€</h3>
-          <p><%= @product.stock %> in stock</p>
-          <%= button_to "Add to cart", add_to_cart_path(@product), method: :post, class: "btn cart-button" %>
+          <% if @product.stock <= 0 %>
+            <p>Sorry, this product is currently out of stock</p>
+          <% else %>
+          <p><%= @product.stock %> in stock</p>          
+            <%= button_to "Add to cart", add_to_cart_path(@product), method: :post, class: "btn cart-button" %>
+          <% end %>
         </div>
       </div>
     </div>
