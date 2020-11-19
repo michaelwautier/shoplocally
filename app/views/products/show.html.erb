@@ -35,9 +35,11 @@
 <div class="bg-gray p-3">
   <div class="row">
     <% @product.shop.products.each do |product| %>
-      <div class="col-12 col-md-4">
-        <%= render 'products/product_card', product: product %>
-      </div>
+      <% unless product == @product %>        
+        <div class="col-12 col-md-4">
+          <%= render 'products/product_card', product: product %>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>
