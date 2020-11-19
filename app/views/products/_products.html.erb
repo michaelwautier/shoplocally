@@ -1,4 +1,6 @@
-<%= link_to  icon('fas', 'plus', 'Add a product'), new_shop_product_path(@shop) %>
+<% unless @shop.nil? %>
+  <%= link_to  icon('fas', 'plus', 'Add a product'), new_shop_product_path(@shop) %>
+<% end %>
 
 <div class="row mt-4">
   <% products.each do |product| %>

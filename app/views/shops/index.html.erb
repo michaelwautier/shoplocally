@@ -1,4 +1,4 @@
-<h1>All shops near you <%= link_to icon('fas', 'plus'), new_shop_path %></h1>
+<h2>All shops near you <%= link_to icon('fas', 'plus'), new_shop_path %></h2>
 <% @products&.each do |product| %>
   <div class="col-12 col-md-6 col-xl-4">
     <%= render 'products/product_card', product: product %>
@@ -6,7 +6,7 @@
 <% end %>
 <div class="row">
   <% @shops.each do |shop| %>
-    <div class="col-12 col-md-6 col-xl-3 mb-4">
+    <div class="col-12 col-md-6 col-xl-4 mb-4">
       <%= link_to shop_path(shop) do %>
         <div class="card-shop">
           <% if shop.logo.attached? %>
@@ -24,9 +24,19 @@
     </div>
   <% end %>
 </div>
-<div class="shop-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
-  Breakfast
+
+<h2>Browse categories</h2>
+
+<div class="row">
+  <% Category::CATEGORIES.each do |category| %>
+    <div class="col-12 col-md-4 mb-4">
+      <%= link_to "/products/find/#{category}" do %>
+        <%= render  "categories/card", category: category %>
+      <% end %>
+    </div>
+  <% end %>
 </div>
+
 <% unless @shops.empty? %>
   <div id="map"
       style="width: 100%; height: 600px;"

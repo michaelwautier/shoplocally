@@ -5,6 +5,11 @@ class ProductsController < ApplicationController
     @products = Product.where(shop_id: params[:shop_id])
   end
 
+  def find
+    sql_query = "category.name ILIKE :query"
+    @products = Product.where(sql_query, query: "%#{params[:category]}%")
+  end
+
   def show
     @product = Product.find(params[:id])
   end
@@ -77,6 +82,11 @@ class ProductsController < ApplicationController
     @product.save
     redirect_to current_cart_path, notice: 'Product removed from cart!'
   end
+
+  def find
+    
+  end
+  
 
   private
 
