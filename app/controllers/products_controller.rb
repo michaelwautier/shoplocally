@@ -6,8 +6,8 @@ class ProductsController < ApplicationController
   end
 
   def find
-    sql_query = "category.name ILIKE :query"
-    @products = Product.where(sql_query, query: "%#{params[:category]}%")
+    @category = Category.find_by(name: params[:category])
+    @products = Product.where(category: @category)
   end
 
   def show
