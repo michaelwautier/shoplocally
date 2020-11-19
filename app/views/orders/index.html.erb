@@ -1,0 +1,64 @@
+<h1>Orders#index</h1>
+
+<% @orders.each do |order| %>
+<p>Status of the order: <%= order.status %> </p>
+  <ul class="list-group list-group-flush border-bottom pb-4">
+    <div class="list-group-item">
+      <div class="row text-right">
+        <div class="col-2 text-left">
+          <p>Product</p>
+        </div>
+        <div class="col-2 text-left">
+          <p>Shop</p>
+        </div>
+        <div class="col-2">
+          <p>Quantity</p>
+        </div>
+        <div class="col-2">
+          <p>Unit Price</p>
+        </div>
+        <div class="col-2">
+          <p>Taxes</p>
+        </div>
+        <div class="col-2">
+          <p>Total</p>
+        </div>
+      </div>
+    </div>
+    <% total_price = 0 %>
+    <% order.cart.cart_products.each do |cart_product| %>
+      <div class="list-group-item">
+        <div class="row text-right">
+          <div class="col-2 text-left">
+            <p><%= link_to cart_product.product.name, shop_product_path(cart_product.product.shop, cart_product.product) %></p>
+          </div>
+          <div class="col-2 text-left">
+            <p><%= cart_product.product.shop.name %></p>
+          </div>
+          <div class="col-2">
+            <p><%= cart_product.quantity%></p>
+          </div>
+          <div class="col-2">
+            <p><%= number_with_precision(cart_product.product.price, precision: 2) %>€</p>
+          </div>
+          <div class="col-2">
+            <p><%= cart_product.product_tax%> ( <%=cart_product.product_tax / 100 * cart_product.product.price%> €)</p>
+          </div>
+          <div class="col-2">
+            <p><%= number_with_precision(cart_product.quantity * cart_product.product.price + (cart_product.product_tax / 100 * cart_product.product.price), precision: 2) %>€</p>
+          </div>
+        </div>
+      </div>
+    <% total_price += cart_product.quantity * cart_product.product.price + (cart_product.product_tax / 100 * cart_product.product.price) %>
+    <% end %>
+    <div class="list-group-item">
+      <div class="row text-right">
+        <div class="col-10"></div>
+        <div class="col-2">
+          <p>Total: <%= number_with_precision(total_price, precision: 2) %>€</p>
+        </div>
+      </div>
+    </div>
+  </ul>
+<% end %>
+
