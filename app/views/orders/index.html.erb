@@ -11,7 +11,10 @@
         <div class="col-2 text-left">
           <p>Shop</p>
         </div>
-        <div class="col-2">
+        <div class="col-1 text-left">
+          <p>Delivery</p>
+        </div>
+        <div class="col-1">
           <p>Quantity</p>
         </div>
         <div class="col-2">
@@ -35,7 +38,13 @@
           <div class="col-2 text-left">
             <p><%= cart_product.product.shop.name %></p>
           </div>
-          <div class="col-2">
+          <div class="col-1 text-left">
+            <p><% order.deliveries.each do |delivery| %>
+              <%= delivery.status %>
+              <% end %>
+            </p>
+          </div>
+          <div class="col-1">
             <p><%= cart_product.quantity%></p>
           </div>
           <div class="col-2">
@@ -60,5 +69,7 @@
       </div>
     </div>
   </ul>
+  <% order.deliveries.each { |delivery| delivery.status } %>
+
 <% end %>
 

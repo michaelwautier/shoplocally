@@ -46,7 +46,7 @@ class CartsController < ApplicationController
   def create_order(shipping_address)
     cart = current_cart
     @order = Order.new(address: shipping_address, cart: cart, user: current_user)
-    @order.status = 'new'
+    @order.status = 'Pending'
     if @order.save
       cart.update(current_cart: false)
       # TODO: redirect to orders/index for current user
@@ -63,7 +63,7 @@ class CartsController < ApplicationController
   def order_to_deliveries(order)
     shops = order.cart.cart_products.map { |line| line.product.shop }
     shops.uniq.each do |shop|
-      deli = Delivery.new(order: order, user: order.cart.user, shop: shop, status: 'new')
+      deli = Delivery.new(order: order, user: order.cart.user, shop: shop, status: 'Pending')
       deli.save!
     end
   end
