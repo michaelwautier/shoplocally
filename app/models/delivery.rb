@@ -1,7 +1,7 @@
 class Delivery < ApplicationRecord
   belongs_to :order
   belongs_to :shop
-  belongs_to :user
+  belongs_to :user, optional: true
   belongs_to :vehicle, optional: true
 
   def cart_products
