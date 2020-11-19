@@ -1,0 +1,5 @@
+meta_product_name: "ShopLocally"
+meta_title: "Support your local community"
+meta_description: "Bring solidarity to your neighborhood by shopping near your home !"
+meta_image: "cover.jpg" # should exist in `app/assets/images/`
+twitter_account: "@product_twitter_account"   # required for Twitter Cards

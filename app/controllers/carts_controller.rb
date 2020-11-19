@@ -18,6 +18,7 @@ class CartsController < ApplicationController
       @address = Address.new(checkout_address_params)
     end
     if @address.save
+      current_user.update(address: @address) if params[:save_user_address].present?
       create_order(@address)
     else
       flash.now[:alert] = 'Please provide a shipping address'
