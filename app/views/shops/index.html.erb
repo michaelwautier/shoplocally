@@ -1,5 +1,9 @@
 <h1>All shops near you <%= link_to icon('fas', 'plus'), new_shop_path %></h1>
-
+<% @products&.each do |product| %>
+  <div class="col-12 col-md-6 col-xl-4">
+    <%= render 'products/product_card', product: product %>
+  </div>
+<% end %>
 <div class="row">
   <% @shops.each do |shop| %>
     <div class="col-12 col-md-6 col-xl-3 mb-4">
@@ -23,7 +27,9 @@
 <div class="shop-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
   Breakfast
 </div>
-<div id="map"
-     style="width: 100%; height: 600px;"
-     data-markers="<%= @markers.to_json %>"
-     data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+<% unless @shops.empty? %>
+  <div id="map"
+      style="width: 100%; height: 600px;"
+      data-markers="<%= @markers.to_json %>"
+      data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+<% end %>
