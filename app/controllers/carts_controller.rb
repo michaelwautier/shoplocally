@@ -46,7 +46,7 @@ class CartsController < ApplicationController
   def create_order(shipping_address)
     cart = current_cart
     @order = Order.new(address: shipping_address, cart: cart, user: current_user)
-    @order.status = 'new'
+    @order.status = 'Pending'
     if @order.save
       cart.update(current_cart: false)
       # TODO: redirect to orders/index for current user
