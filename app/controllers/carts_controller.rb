@@ -45,19 +45,26 @@ class CartsController < ApplicationController
 
   def create_order(shipping_address)
     cart = current_cart
-    @order = Order.new
-    @order.address = shipping_address
-    @order.cart = cart
-    @order.user = current_user
+    @order = Order.new(address: shipping_address, cart: cart, user: current_user)
     @order.status = 'new'
     if @order.save
       cart.update(current_cart: false)
-      # TODO: redirect to orders/index for curret user
+      # TODO: redirect to orders/index for current user
+      order_to_deliveries(@order)
       redirect_to cart_checkout_path, notice: 'Your order has been placed!'
     else
       @address = Address.new
       flash.now[:alert] = 'Oeps something went wrong order not create!'
       render :checkout
+    end
+  end
+
+  # create a delivery for each shop from the order
+  def order_to_deliveries(order)
+    shops = order.cart.cart_products.map { |line| line.product.shop }
+    shops.uniq.each do |shop|
+      deli = Delivery.new(order: order, user: order.cart.user, shop: shop, status: 'new')
+      deli.save!
     end
   end
 end
