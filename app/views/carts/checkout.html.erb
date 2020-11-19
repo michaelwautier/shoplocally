@@ -1,86 +1,100 @@
-
-<nav class="mt-3">
-  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <a class="nav-link active" id="nav-order-tab" data-toggle="tab" href="#nav-order" role="tab" aria-controls="nav-order" aria-selected="true">Order</a>
-    <a class="nav-link" id="nav-shipping-tab" data-toggle="tab" href="#nav-shipping" role="tab" aria-controls="nav-shipping" aria-selected="false">Shipping</a>
-  </div>
-</nav>
-<div class="tab-content" id="nav-tabContent">
-  <div class="tab-pane fade show active" id="nav-order" role="tabpanel" aria-labelledby="nav-order-tab">
-    <ul class="list-group list-group-flush border-bottom pb-4">
-  <div class="list-group-item">
-    <div class="row text-right">
-      <div class="col-4 text-left">
-        <p>Product</p>        
+<div data-controller="checkout">
+  <div class="d-flex justify-content-between py-2">
+    <div>
+      <div class="progress" style="width: 200%">
+        <div data-target="checkout.progress" class="progress-bar bg-info" role="progressbar"  aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
       </div>
-      <div class="col-2 text-left">
-        <p>Shop</p>        
-      </div>
-      <div class="col-2">
-        <p>Quantity</p>        
-      </div>
-      <div class="col-2">
-        <p>Unit Price</p>
-      </div>
-      <div class="col-2">
-        <p>Total</p>
-      </div>        
+      <h5 data-target="checkout.output" class="text-secondary p-2"></h5>
+    </div>
+    <div class="mt-2 mr-5">
+      <button data-action="click->checkout#prev" data-target="checkout.prevBtn" class="btn btn-outline-secondary d-none">Previous</button>
+      <button data-action="click->checkout#next" class="btn btn-outline-primary ml-1">Next</button>
     </div>
   </div>
-  <% total_price = 0 %>
-  <% @cart.cart_products.order(created_at: :desc).each do |cart_product| %>
+
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active mt-3" data-target="checkout.tab1" id="nav-order" role="tabpanel" aria-labelledby="nav-order-tab">
     <div class="list-group-item">
-      <div class="row text-right">
+      <div class="row text-right font-weight-bold">
         <div class="col-4 text-left">
-          <p><%= link_to cart_product.product.name, shop_product_path(cart_product.product.shop, cart_product.product) %></p>        
+          <p>Product</p>        
         </div>
         <div class="col-2 text-left">
-          <p><%= cart_product.product.shop.name %></p>        
+          <p>Shop</p>        
         </div>
         <div class="col-2">
-          <p>
-          
-          <%= cart_product.quantity  %> 
-              
+          <p>Quantity</p>        
         </div>
         <div class="col-2">
-          <p><%= number_with_precision(cart_product.product.price, precision: 2) %>€</p>
+          <p>Unit Price</p>
         </div>
         <div class="col-2">
-          <p><%= number_with_precision(cart_product.quantity * cart_product.product.price, precision: 2) %>€</p>
+          <p>Total</p>
         </div>        
       </div>
     </div>
-  <% total_price += cart_product.quantity * cart_product.product.price %>
-  <% end %>
-  <div class="list-group-item">
-    <div class="row text-right">
-      <div class="col-10"></div>
-      <div class="col-2">
-        <p>Total: <%= number_with_precision(total_price, precision: 2) %>€</p>
-      </div>        
-    </div>
-  </div>
-</ul>
-  </div>
-  
-  <div class="tab-pane fade" id="nav-shipping" role="tabpanel" aria-labelledby="nav-shipping-tab">
-    <div class="p-4">
-      <%= simple_form_for @address, url: cart_checkout_path, method: :post, remote: true do |f| %>
-        <% if current_user.address %>
-          <%= check_box_tag(:use_user_address) %> <span>Use this address: <strong><%= current_user.address.full_address %></strong></span>
-        <% else %>
-          <%= check_box_tag(:save_user_address) %>  <span>Save this address</span>
-        <% end %>
-        <hr>
-        <%= f.input :street %>
-        <%= f.input :number %>
-        <%= f.input :postcode %>
-        <%= f.input :city %>
-        <hr>
-        <%= select_tag(:payment_id, raw('<option class="p-2" value="1">credit card</option><option class="p-2" value="2">paypall</option><option class="p-2" value="3">bancontact</option>')) %>
-        <%= f.submit 'Pay now', class:"btn btn-outline-success" %>
-        <% end %>
+    <% total_price = 0 %>
+    <% @cart.cart_products.order(created_at: :desc).each do |cart_product| %>
+      <div class="list-group-item">
+        <div class="row text-right">
+          <div class="col-4 text-left">
+            <p><%= link_to cart_product.product.name, shop_product_path(cart_product.product.shop, cart_product.product) %></p>        
+          </div>
+          <div class="col-2 text-left">
+            <p><%= cart_product.product.shop.name %></p>        
+          </div>
+          <div class="col-2">
+            <p>
+            
+            <%= cart_product.quantity  %> 
+                
+          </div>
+          <div class="col-2">
+            <p><%= number_with_precision(cart_product.product.price, precision: 2) %>€</p>
+          </div>
+          <div class="col-2">
+            <p><%= number_with_precision(cart_product.quantity * cart_product.product.price, precision: 2) %>€</p>
+          </div>        
+        </div>
+      </div>
+    <% total_price += cart_product.quantity * cart_product.product.price %>
+    <% end %>
+    <div class="list-group-item">
+      <div class="row text-right">
+        <div class="col-10"></div>
+        <div class="col-2">
+          <p>Total: <%= number_with_precision(total_price, precision: 2) %>€</p>
+        </div>        
       </div>
     </div>
+  </ul>
+    </div>
+    
+    <div class="tab-pane fade mt-3" data-target="checkout.tab2" id="nav-shipping" role="tabpanel" aria-labelledby="nav-shipping-tab">
+      <div class="p-4">
+        <%= simple_form_for @address, url: cart_checkout_path, method: :post, remote: true do |f| %>
+          <% if current_user.address %>
+            <%= check_box_tag(:use_user_address) %> <span>Use this address: <strong><%= current_user.address.full_address %></strong></span>
+          <% else %>
+            <%= check_box_tag(:save_user_address) %>  <span>Save this address</span>
+          <% end %>
+          <div class="mt-2">
+            <%= check_box_tag(:pickup) %>  <span>Pickup in shop</span>
+          </div>
+          <hr>
+          <%= f.input :street %>
+          <%= f.input :number %>
+          <%= f.input :postcode %>
+          <%= f.input :city %>
+          <hr>
+          <%= f.submit 'Pay now', class:"btn btn-outline-success d-none" %>
+          <% end %>
+        </div>
+      </div>
+  </div>
+  <div class="tab-pane fade mt-3" data-target="checkout.tab3" id="nav-payment" role="tabpanel" aria-labelledby="nav-payment-tab">
+    <p>payment options here</p>
+    <%= select_tag(:payment_id, raw('<option class="p-2" value="1">credit card</option><option class="p-2" value="2">paypall</option><option class="p-2" value="3">bancontact</option>')) %>
+  </div>
+  
 </div>
