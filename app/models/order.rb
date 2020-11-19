@@ -4,6 +4,6 @@ class Order < ApplicationRecord
   belongs_to :address, optional: true
   has_many   :deliveries
 
-  validates :cart, presence: :true
-  validates :user, presence: :true
+  validates :cart, presence: true
+  validates :user, presence: true
 end
