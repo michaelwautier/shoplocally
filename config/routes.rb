@@ -5,7 +5,11 @@ Rails.application.routes.draw do
     resources :products, except: [:destroy, :update]
     resources :delivery_options, only: [:index, :new, :create, :edit]
   end
-  resources :orders, only: [:index, :show]
+
+  # orders and deliveries
+  resources :orders, only: [:index, :show] do
+    resources :deliveries, only: [:show]
+  end
 
   # products by category
   get 'categories/:id', to: 'categories#show'
