@@ -5,25 +5,22 @@
   <ul class="list-group list-group-flush border-bottom pb-4">
     <div class="list-group-item">
       <div class="row text-right">
-        <div class="col-2 text-left">
+        <div class="col-2 text-left font-weight-bold">
           <p>Product</p>
         </div>
-        <div class="col-2 text-left">
+        <div class="col-2 text-left font-weight-bold">
           <p>Shop</p>
         </div>
-        <div class="col-1 text-left">
-          <p>Delivery</p>
-        </div>
-        <div class="col-1">
+        <div class="col-2 text-center font-weight-bold">
           <p>Quantity</p>
         </div>
-        <div class="col-2">
+        <div class="col-2 font-weight-bold">
           <p>Unit Price</p>
         </div>
-        <div class="col-2">
+        <div class="col-2 font-weight-bold">
           <p>Taxes</p>
         </div>
-        <div class="col-2">
+        <div class="col-2 font-weight-bold">
           <p>Total</p>
         </div>
       </div>
@@ -38,13 +35,7 @@
           <div class="col-2 text-left">
             <p><%= cart_product.product.shop.name %></p>
           </div>
-          <div class="col-1 text-left">
-            <p><% order.deliveries.each do |delivery| %>
-              <%= delivery.status %>
-              <% end %>
-            </p>
-          </div>
-          <div class="col-1">
+          <div class="col-2 text-center">
             <p><%= cart_product.quantity%></p>
           </div>
           <div class="col-2">
@@ -63,13 +54,26 @@
     <div class="list-group-item">
       <div class="row text-right">
         <div class="col-10"></div>
-        <div class="col-2">
-          <p>Total: <%= number_with_precision(total_price, precision: 2) %>€</p>
+          <div class="col-2">
+            <p>Total: <%= number_with_precision(total_price, precision: 2) %>€</p>
+          </div>
+        </div>
+        <div class="row border-bottom py-2 my-2">
+          <div class="col-4 font-weight-bold">Shop</div>
+          <div class="col-2 text-left font-weight-bold">Delivery status</div>
+        </div>
+          <% order.deliveries.each do |delivery| %>
+        <div class="row text-right">
+        <div class="col-4 text-left">
+          <p> <%= link_to delivery.shop.name, shop_path(delivery.shop)  %> </p>
+        </div>
+        <div class="col-2 text-left">
+          <p> <%=link_to delivery.status, order_delivery_path(order, delivery) %> </p>
         </div>
       </div>
+    <% end %>
     </div>
   </ul>
-  <% order.deliveries.each { |delivery| delivery.status } %>
 
 <% end %>
 
