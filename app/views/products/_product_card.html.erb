@@ -7,8 +7,8 @@
     <% end %>
     <div class="product-card-infos">
       <div>
-        <h2><%= product.name %></h2>
-        <p><%= product.description.length > 40 ? "#{product.description.first(40)} (...)" : product.description %></p>
+        <h2><%= product.name.length > 24 ? product.name.first(24) : product.name %></h2>
+        <p><%= product.description.length > 37 ? "#{product.description.first(37)} (...)" : product.description %></p>
       </div>
       <div class="text-right">
         <h2 class="product-card-pricing"><%= number_with_precision(product.price, precision: 2) %>€</h2>
