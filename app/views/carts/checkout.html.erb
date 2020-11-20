@@ -1,12 +1,12 @@
 <div data-controller="checkout">
-  <div class="d-flex justify-content-between py-2">
+  <div class="d-flex justify-content-between py-2 px-4">
     <div>
       <div class="progress" style="width: 200%">
         <div data-target="checkout.progress" class="progress-bar bg-info" role="progressbar"  aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
       </div>
       <h5 data-target="checkout.output" class="text-secondary p-2"></h5>
     </div>
-    <div class="mt-2 mr-5">
+    <div class="mt-1 mr-1">
       <button data-action="click->checkout#prev" data-target="checkout.prevBtn" class="btn btn-outline-secondary d-none">Previous</button>
       <button data-action="click->checkout#next" class="btn btn-outline-primary ml-1">Next</button>
     </div>
@@ -63,11 +63,10 @@
       <div class="row text-right">
         <div class="col-10"></div>
         <div class="col-2">
-          <p>Total: <%= number_with_precision(total_price, precision: 2) %>€</p>
+          <p><strong>Order total:</strong> <%= number_with_precision(total_price, precision: 2) %>€</p>
         </div>        
       </div>
     </div>
-  </ul>
     </div>
     
     <div class="tab-pane fade mt-3" data-target="checkout.tab2" id="nav-shipping" role="tabpanel" aria-labelledby="nav-shipping-tab">
@@ -82,19 +81,31 @@
             <%= check_box_tag(:pickup) %>  <span>Pickup in shop</span>
           </div>
           <hr>
+          <h5 class="text-secondary my-4">New shipping addres</h5>
           <%= f.input :street %>
           <%= f.input :number %>
           <%= f.input :postcode %>
           <%= f.input :city %>
-          <hr>
           <%= f.submit 'Pay now', class:"btn btn-outline-success d-none" %>
           <% end %>
         </div>
       </div>
   </div>
-  <div class="tab-pane fade mt-3" data-target="checkout.tab3" id="nav-payment" role="tabpanel" aria-labelledby="nav-payment-tab">
-    <p>payment options here</p>
-    <%= select_tag(:payment_id, raw('<option class="p-2" value="1">credit card</option><option class="p-2" value="2">paypall</option><option class="p-2" value="3">bancontact</option>')) %>
+  <div class="tab-pane fade mt-5 p-5" data-target="checkout.tab3" id="nav-payment" role="tabpanel" aria-labelledby="nav-payment-tab">
+    <div class="d-flex justify-content-around align-items-center w-50 mx-auto px-5">
+      <div><input type="radio" name="tender" checked></div>
+      <div><input type="radio" name="tender"></div>
+      <div><input type="radio" name="tender"></div>
+    </div>
+    <div class="d-flex justify-content-around align-items-center w-50 mx-auto px-5">
+      <div><i class="far fa-credit-card fa-3x" data-placement="bottom"></i></div>
+      <div><i class="fab fa-cc-visa fa-3x"></i></div>
+      <div><i class="fab fa-cc-paypal fa-3x"></i></div>
+    </div>
+    <div class="mx-auto mt-5 p-5" style="width:max-content">
+      <button class="btn btn-outline-success btn-lg">Pay now</button>
+    </div>
+    
   </div>
   
 </div>
