@@ -1,4 +1,5 @@
 class ShopsController < ApplicationController
+  before_action :authenticate_user!, except: %i[index show]
   def index
     if params[:query].present?
       sql_query = "name ILIKE :query"
@@ -17,9 +18,9 @@ class ShopsController < ApplicationController
     @addresses = Address.all
     @markers = @shops.map do |shop|
       {
-       lat: shop.address.latitude,
-       lng: shop.address.longitude,
-       infoWindow: render_to_string(partial: "info_window", locals: { shop: shop })
+        lat: shop.address.latitude,
+        lng: shop.address.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { shop: shop })
       }
     end
   end

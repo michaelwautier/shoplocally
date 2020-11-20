@@ -1,7 +1,13 @@
-<h2>All shops near you <%= link_to icon('fas', 'plus'), new_shop_path %></h2>
-<% @products&.each do |product| %>
-  <div class="col-12 col-md-6 col-xl-4">
-    <%= render 'products/product_card', product: product %>
+<% if @products.nil? %>
+  <h2>All shops near you <%= link_to icon('fas', 'plus'), new_shop_path if current_user %></h2>
+<% else %>
+  <h2>Results for '<%= params[:query] %>'</h2>
+  <div class="row">
+  <% @products&.each do |product| %>
+      <div class="col-12 col-md-6 col-xl-4 mb-3">
+        <%= render 'products/product_card', product: product %>
+      </div>
+  <% end %>
   </div>
 <% end %>
 <div class="row">
@@ -37,6 +43,7 @@
   <% end %>
 </div>
 <% unless @shops.empty? %>
+<h2>Explore the shops around you</h2>
   <div id="map"
       style="width: 100%; height: 600px;"
       data-markers="<%= @markers.to_json %>"
