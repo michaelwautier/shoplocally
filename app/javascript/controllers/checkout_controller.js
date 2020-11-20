@@ -1,7 +1,6 @@
 import { Controller } from "stimulus"
 let currentTab = 1
 let tabs = []
-
 export default class extends Controller {
   static targets = [ "output", "progress","tab1", "tab2", "tab3","prevBtn"];
   
@@ -51,5 +50,11 @@ export default class extends Controller {
     }
     currentTab -=1
     this.updateActiveTab()
+  }
+
+  payNow() {
+    document.getElementById("submitBtn").click()
+    const url = window.location.href
+    window.location.replace(url.replace("cart/checkout", "orders"))
   }
 }
