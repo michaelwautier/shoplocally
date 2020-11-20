@@ -51,7 +51,7 @@ class CartsController < ApplicationController
       cart.update(current_cart: false)
       # TODO: redirect to orders/index for current user
       order_to_deliveries(@order)
-      redirect_to cart_checkout_path, notice: 'Your order has been placed!'
+      redirect_to orders_path, notice: 'Your order has been placed!'
     else
       @address = Address.new
       flash.now[:alert] = 'Oeps something went wrong order not create!'
