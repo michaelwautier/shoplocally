@@ -32,10 +32,10 @@ import { initMapbox } from '../plugins/init_mapbox';
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
-  navigator.geolocation.getCurrentPosition((data) => {
-    console.log(data.coords.latitude);
-    console.log(data.coords.longitude);
-  });
+  // navigator.geolocation.getCurrentPosition((data) => {
+  //   let params = `?lat=${data.coords.latitude}&&lng=${data.coords.longitude}`
+  //   Turbolinks.visit(window.location.pathname+params);
+  // });
     initMapbox();
 });
 

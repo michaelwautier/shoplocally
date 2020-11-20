@@ -22,6 +22,9 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto d-flex align-items-center pr-3">
       <% if user_signed_in? %>
+        <li class="nav-item">
+          <%= link_to  icon('fas', 'shopping-cart'), current_cart_path, class: "text-white secret" %>
+        </li>
         <li class="nav-item dropdown">
           <% if current_user.avatar.attached? %>
             <%= cl_image_tag current_user.avatar.key, id: "navbarDropdown", class: "rounded-circle avatar dropdown-toggle", data: { toggle: "dropdown"}%>
@@ -33,9 +36,6 @@
             <%= link_to "Update profile", edit_user_registration_path , class: "dropdown-item" %>
             <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
           </div>
-        </li>
-        <li class="nav-item">
-          <%= link_to  icon('fas', 'shopping-cart'), current_cart_path, class: "text-white" %>
         </li>
       <% else %>
         <li class="nav-item">
