@@ -1,4 +1,4 @@
-<h1>Delivery details</h1>
+<h2>Delivery details for order #SL00<%= @delivery.order.id %></h2>
 
 <div class="card my-3">
   <h5 class="card-header">Shop: <%= @delivery.shop.name %></h5>
@@ -7,7 +7,7 @@
     <% @cart_products = @delivery.cart_products %>
     <% render @cart_products %>
 
-    <div class="row mt-3">
+    <div class="row mt-1">
       <div class="col">
         <h5 class="card-title"><strong>Status:</strong> <%= @delivery.status %></h5>
       </div>
