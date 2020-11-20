@@ -37,6 +37,9 @@ export default class extends Controller {
       // do payment and submit form if payment ok
       return
     }
+    if (currentTab == 2) {
+      // validate address
+    }
     currentTab += 1
     this.updateActiveTab()
     this.prevBtnTarget.classList.remove("d-none")
