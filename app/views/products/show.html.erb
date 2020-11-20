@@ -34,7 +34,7 @@
   </div>
 </div>
 
-<% if @product.photos.attached? %>
+<!--<% if @product.photos.attached? %>
   <section id="product-photos">
   <% @product.photos.each do |photo| %>
     <% unless photo == @product.photos.first %>  
@@ -42,7 +42,7 @@
     <% end %>
   <% end %>
   </section>
-<% end %>
+<% end %>-->
 
 
 <h2 class="my-4">See other products from <%= @product.shop.name %></h2>
@@ -50,7 +50,7 @@
   <div class="row">
     <% @product.shop.products.each do |product| %>
       <% unless product == @product %>        
-        <div class="col-12 col-md-4">
+        <div class="col-12 col-md-6 col-xl-4 mb-3">
           <%= render 'products/product_card', product: product %>
         </div>
       <% end %>
