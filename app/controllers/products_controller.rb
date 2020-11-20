@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_user!, exept: %i[index show]
+  before_action :authenticate_user!, except: %i[index show]
   def index
     @shop = Shop.find(params[:shop_id])
     @products = Product.where(shop_id: params[:shop_id])
