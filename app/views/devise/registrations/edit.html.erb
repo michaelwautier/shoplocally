@@ -29,15 +29,17 @@
                       input_html: { autocomplete: "current-password" } %>
         </div>
 
-        <div class="form-actions">
-          <%= f.button :submit, "Update", class: "btn btn-primary" %>
+        <div class="form-actions form-row">
+          <div class="col-5">
+            <%= link_to "Cancel", root_path, class: "btn btn-warning" %>
+          </div>
+          <div class="col-7">
+            <%= f.button :submit, "Update", class: "btn btn-primary" %>
+          </div>
         </div>
       <% end %>
 
-      <div class="d-flex justify-content-between">
-        <%= link_to "Back", :back %>
-        <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-      </div>
+      <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
     </div>
   </div>
