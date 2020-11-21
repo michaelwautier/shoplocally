@@ -20,3 +20,9 @@ if Category.count == 0
   end
   puts "Categories created"
 end
+
+# convert price (float) to price_in_cents (integer)
+Product.all.each do |product|
+  product.update(price_in_cents: (product.price * 100).to_i)
+  puts ("price = #{product.price} | price_in_cents = #{product.price_in_cents}")
+end
