@@ -25,7 +25,7 @@ export default class extends Controller {
   }
 
   next() {
-    if (currentStep === 3) { return }
+    if (currentStep === steps.length) { return }
 
     currentStep++
     this.updateActiveStep()
