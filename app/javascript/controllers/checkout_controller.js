@@ -4,12 +4,12 @@ let steps = []
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = [ "step1", "step2", "step3", "progress", "next", "prev" ]
+  static targets = [ "step1", "step2", "step3", "progress", "next", "prev", "heading" ]
 
   connect() {
     steps = [this.step1Target, this.step2Target, this.step3Target]
-    document.getElementById("new_address").addEventListener("submit", () => { currentStep = 1 })
-    this.progressTarget.style.width = `${currentStep * 33.33}%`
+    document.getElementById("new_address").addEventListener("submit", () => { currentStep = 2 })
+    this.updateActiveStep()
   }
 
   updateActiveStep() {
@@ -21,6 +21,7 @@ export default class extends Controller {
       }
     }
     this.progressTarget.style.width = `${currentStep * 33.33}%`
+    this.headingTarget.innerHTML = `Step ${currentStep} of ${steps.length}` 
   }
 
   next() {

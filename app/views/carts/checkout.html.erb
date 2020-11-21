@@ -1,8 +1,12 @@
 <div data-controller="checkout">
+  <div class="w-75 mx-auto text-center my-1">
+    <h5 class="text-secondary" data-target="checkout.heading">Step 1 of 3</h5>
+  </div>
   <div class="progress w-75 mx-auto">
     <div data-target="checkout.progress" class="progress-bar bg-info" role="progressbar"></div>
   </div>
-  <div class="m-3 d-flex justify-content-center">
+  
+  <div class="m-3 p-3 d-flex justify-content-center">
     <button data-target="checkout.prev" data-action="click->checkout#prev" class="mx-2 btn btn-outline-dark">Previous</button>
     <button data-target="checkout.next" data-action="click->checkout#next" class="mx-2 btn btn-outline-dark">Next</button>
   </div>
@@ -75,13 +79,9 @@
     </div>
 
     <div data-target="checkout.step3" class="d-none">
-      <div class="row form-group">
-        <div class="col-3 offset-3">
-          <%= select_tag(:payment_id, raw('<option class="p-2" value="1">credit card</option><option class="p-2" value="2">paypall</option><option class="p-2" value="3">bancontact</option>'), class:"py-2 px-3") %>
-        </div>
-        <div class="col-3">
-          <%= f.submit 'Pay now', class:"btn btn-outline-success" %>
-        </div>
+      <div class="d-flex justify-content-center">
+        <%= select_tag(:payment_id, raw('<option class="p-2" value="1">credit card</option><option class="p-2" value="2">paypall</option><option class="p-2" value="3">bancontact</option>'), class:"py-2 px-3 mx-3") %>
+        <%= f.submit 'Pay now', class:"mx-2 btn btn-outline-success" %>
       </div>
     </div>
     <% end %>
