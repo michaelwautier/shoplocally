@@ -80,7 +80,7 @@
 
     <div data-target="checkout.step3" class="d-none">
       <div class="d-flex justify-content-center">
-        <%= select_tag(:payment_id, raw('<option class="p-2" value="1">credit card</option><option class="p-2" value="2">paypall</option><option class="p-2" value="3">bancontact</option>'), class:"py-2 px-3 mx-3") %>
+        <%= select_tag(:payment_id, raw('<option class="p-2" value="1">credit card</option><option class="p-2" value="2">paypal</option><option class="p-2" value="3">bancontact</option>'), class:"py-2 px-3 mx-3") %>
         <%= f.submit 'Pay now', class:"mx-2 btn btn-outline-success" %>
       </div>
     </div>
