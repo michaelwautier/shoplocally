@@ -1,16 +1,36 @@
 <%= simple_form_for @shop do |f| %>
-  <%= f.input :name %>
-  <%= f.input :description %>
-  <%= f.input :vat_number %>
-  <label for="street">Street</label>
-  <input type="text" name="street" value="<%= @shop.address&.street %>">
-  <label for="number">Number</label>
-  <input type="text" name="number" value="<%= @shop.address&.number %>">
-  <label for="postcode">Zipcode</label>
-  <input type="text" name="postcode" value="<%= @shop.address&.postcode %>">
-  <label for="city">City</label>
-  <input type="text" name="city" value="<%= @shop.address&.city %>">
-  <%= f.input :logo, as: :file %>
+  <%= f.input :name, placeholder: "Bio-Planet" %>
+  <%= f.input :description, placeholder: "Find seasonal products" %>
+  <%= f.input :vat_number, label: "VAT N°", placeholder: "BE1234567890" %>
+  <h4>Adress</h4>
+  <div class="form-row form-group">
+    <div class="col-9">
+      <label for="street">Street</label>
+      <input type="text" name="street" class="form-control" value="<%= @shop.address&.street %>" placeholder="Cantersteen">
+    </div>
+    <div class="col-3">
+      <label for="number">Number</label>
+      <input type="text" name="number" class="form-control" value="<%= @shop.address&.number %>" placeholder="12">
+    </div>
+  </div>
+  <div class="form-row form-group">
+    <div class="col-6">
+      <label for="postcode">Zipcode</label>
+      <input type="text" name="postcode" class="form-control" value="<%= @shop.address&.postcode %>" placeholder="1000">
+    </div>
+    <div class="col-6">
+      <label for="city">City</label>
+      <input type="text" name="city" class="form-control" value="<%= @shop.address&.city %>" placeholder="Brussels">
+    </div>
+  </div>
+  <%= f.input :logo, as: :file, class: "custom-file-input" %>
   <%= f.input :pictures, as: :file, input_html: { multiple: true } %>
-  <%= f.submit %>
+  <div class="form-row form-group">
+    <div class="col-5">
+      <%= link_to  "Cancel", :back, class: "btn btn-warning" %>
+    </div>
+    <div class="col-7">
+      <%= f.button :submit, class: "btn btn-primary" %>
+    </div>
+  </div>
 <% end %>

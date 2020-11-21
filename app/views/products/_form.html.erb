@@ -1,11 +1,26 @@
 <%= simple_form_for([@shop, @product], remote: true ) do |f| %>
-  <%= f.input :name %>
-  <%= f.input :description %>
-  <%= f.input :price %>
-  <%= f.input :stock %>
-  <%= f.input :ean %>
-  <%= f.input :tax, collection: Product::TAXES, selected: @product.tax&.round %>
-  <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+  <%= f.input :name, placeholder: "Carcassone New Edition" %>
+  <%= f.input :description, placeholder: "Boardgame up to 5-6 players" %>
+  <div class="form-row">
+    <div class="col-4">
+      <%= f.input :price, placeholder: "29.90" %>
+    </div>
+    <div class="col-4">
+      <%= f.input :tax, collection: Product::TAXES, selected: @product.tax&.round %>
+    </div>
+    <div class="col-4">
+      <%= f.input :stock, placeholder: "12" %>
+    </div>
+  </div>
+  <%= f.input :ean, placeholder: "9782737358166" %>
   <%= f.input :category, collection: Category.all, selected: @product.category&.id %>
-  <%= f.submit %>
+  <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+  <div class="form-row">
+    <div class="col-5">
+      <%= link_to  "Cancel", :back, class: "btn btn-warning" %>
+    </div>
+    <div class="col-7">
+      <%= f.button :submit, class: "btn btn-primary" %>
+    </div>
+  </div>
 <% end %>
