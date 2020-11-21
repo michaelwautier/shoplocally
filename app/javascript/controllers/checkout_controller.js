@@ -20,7 +20,7 @@ export default class extends Controller {
         steps[index].classList.add("d-none")
       }
     }
-    this.progressTarget.style.width = `${currentStep * 33.33}%`
+    this.progressTarget.style.width = `${currentStep * (100 / steps.length)}%`
     this.headingTarget.innerHTML = `Step ${currentStep} of ${steps.length}` 
   }
 
