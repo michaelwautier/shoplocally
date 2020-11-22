@@ -20,6 +20,9 @@ export default class extends Controller {
         steps[index].classList.add("d-none")
       }
     }
+    console.log(this.prevTarget);
+    (currentStep === 1) ? this.prevTarget.classList.add("disabled") : this.prevTarget.classList.remove("disabled");
+    (currentStep === steps.length) ? this.nextTarget.classList.add("disabled") : this.nextTarget.classList.remove("disabled");
     this.progressTarget.style.width = `${currentStep * (100 / steps.length)}%`
     this.headingTarget.innerHTML = `Step ${currentStep} of ${steps.length}` 
   }
