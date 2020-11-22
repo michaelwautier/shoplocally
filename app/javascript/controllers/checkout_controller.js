@@ -14,11 +14,7 @@ export default class extends Controller {
 
   updateActiveStep() {
     for (let index = 0; index < steps.length; index++) {
-      if ((index + 1) === currentStep) {
-        steps[index].classList.remove("d-none")
-      } else {
-        steps[index].classList.add("d-none")
-      }
+      ((index + 1) === currentStep) ? steps[index].classList.remove("d-none") : steps[index].classList.add("d-none");
     }
     (currentStep === 1) ? this.prevTarget.classList.add("disabled") : this.prevTarget.classList.remove("disabled");
     (currentStep === steps.length) ? this.nextTarget.classList.add("disabled") : this.nextTarget.classList.remove("disabled");
