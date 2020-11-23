@@ -23,6 +23,6 @@ end
 
 # convert price (float) to price_in_cents (integer)
 Product.all.each do |product|
-  product.update(price_in_cents: (product.price * 100).to_i)
-  puts ("price = #{product.price} | price_in_cents = #{product.price_in_cents}")
+  product.update(price_cents: product.price_in_cents )
+  puts ("price_in_cents = #{product.price_in_cents} | price_cents = #{product.price_cents}")
 end

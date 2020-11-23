@@ -32,16 +32,16 @@
         </div>
         <div class="col-2">
           <p>
-            <%= link_to icon('fas', 'minus-circle fa-lg'), remove_from_cart_path(cart_product), method: :delete, data: { confirm: 'Are you sure?'}, remote: true %> 
+            <%= link_to icon('fas', 'minus-circle'), remove_from_cart_path(cart_product), method: :delete, data: { confirm: 'Are you sure?'}, remote: true %> 
             <span class="mx-1"><%= cart_product.quantity  %> </span>
-            <%= link_to icon('fas', 'plus-circle fa-lg'), add_to_cart_path(cart_product.product), method: :post, remote: true %>
+            <%= link_to icon('fas', 'plus-circle'), add_to_cart_path(cart_product.product), method: :post, remote: true %>
           </p>        
         </div>
         <div class="col-2">
-          <p><%= number_with_precision(cart_product.product.price, precision: 2) %>€</p>
+          <p><%= humanized_money_with_symbol(cart_product.product.price) %></p>
         </div>
         <div class="col-2">
-          <p><%= number_with_precision(cart_product.quantity * cart_product.product.price, precision: 2) %>€</p>
+          <p><%= humanized_money_with_symbol(cart_product.quantity * cart_product.product.price) %></p>
         </div>        
       </div>
     </div>
@@ -51,13 +51,13 @@
     <div class="row text-right">
       <div class="col-10"></div>
       <div class="col-2">
-        <p><strong>Total:</strong> <%= number_with_precision(total_price, precision: 2) %>€</p>
+        <p><strong>Total:</strong> <%= humanized_money_with_symbol(total_price) %></p>
       </div>        
     </div>
   </div>
 </ul>
 
-<div class="d-flex justify-content-between mt-4">
-  <%= link_to 'Back', :back, class: "btn btn-outline-warning" if @cart.cart_products.count > 0 %>
+<div class="d-flex justify-content-end mt-4">
+  <%= link_to 'Back', :back, class: "btn btn-outline-warning mr-2 text-dark" if @cart.cart_products.count > 0 %>
   <%= link_to 'Proceed to checkout', cart_checkout_path, class: "btn btn-primary" if @cart.cart_products.count > 0 %>
 </div>

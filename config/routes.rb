@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations' }
   root to: 'shops#index'
   resources :shops do
     resources :shopreviews
     resources :products, except: [:destroy, :update]
     resources :delivery_options, only: [:index, :new, :create, :edit]
   end
+
+  mount StripeEvent::Engine, at: '/stripe-webhooks'
 
   # orders and deliveries
   resources :orders, only: [:index, :show] do
