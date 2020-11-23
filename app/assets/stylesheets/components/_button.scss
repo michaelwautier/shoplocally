@@ -1,0 +1,9 @@
+.action-button {
+  background-color: $yellow;
+  color: white;
+  border-radius: 5px;
+  &:hover {
+    color: white;
+    background-color: $blue;
+  }
+}

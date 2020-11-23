@@ -16,6 +16,28 @@
             <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
           <% end %>
 
+          <h4>Address</h4>
+          <div class="form-row form-group">
+            <div class="col-9">
+              <label for="street">Street</label>
+              <input type="text" name="street" class="form-control" placeholder="Cantersteen" value="<%= current_user.address&.street %>">
+            </div>
+            <div class="col-3">
+              <label for="number">Number</label>
+              <input type="text" name="number" class="form-control" placeholder="12" value="<%= current_user.address&.number %>">
+            </div>
+          </div>
+          <div class="form-row form-group">
+            <div class="col-6">
+              <label for="postcode">Zipcode</label>
+              <input type="text" name="postcode" class="form-control" placeholder="1000" value="<%= current_user.address&.postcode %>">
+            </div>
+            <div class="col-6">
+              <label for="city">City</label>
+              <input type="text" name="city" class="form-control" placeholder="Brussels" value="<%= current_user.address&.city %>">
+            </div>
+          </div>
+
           <%= f.input :password,
                       hint: "leave blank if you don't want to change",
                       required: false,
@@ -31,7 +53,7 @@
 
         <div class="form-actions form-row">
           <div class="col-5">
-            <%= link_to "Cancel", root_path, class: "btn btn-warning" %>
+            <%= link_to "Cancel", root_path, class: "btn btn-outline-warning" %>
           </div>
           <div class="col-7">
             <%= f.button :submit, "Update", class: "btn btn-primary" %>

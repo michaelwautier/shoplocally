@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations' }
   root to: 'shops#index'
   resources :shops do
     resources :products, except: [:destroy, :update]
