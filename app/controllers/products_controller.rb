@@ -16,14 +16,20 @@ class ProductsController < ApplicationController
 
   def create
     @shop = Shop.find(params[:shop_id])
-    @category = Category.find(params[:product][:category])
-    @product = Product.new(product_params)
-    @product.shop = @shop
-    @product.category = @category
-    if @product.save
+    if params[:product][:file]
+      Product.import(params[:product][:file], @shop)
+      flash[:notice] = "Products uploaded successfully"
       redirect_to shop_products_path(@shop)
     else
-      render :new
+      @category = Category.find(params[:product][:category])
+      @product = Product.new(product_params)
+      @product.shop = @shop
+      @product.category = @category
+      if @product.save
+        redirect_to shop_products_path(@shop)
+      else
+        render :new
+      end
     end
   end
 
