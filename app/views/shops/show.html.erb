@@ -19,14 +19,20 @@
           <p class="m-0"><%= @shop.description %></p>
         </div>
         <div class="col-4 border-left border-white text-center d-flex flex-column justify-content-center">
-          <p>Customers reviews</p>
-          <div class="rating-stars">
-            <%= icon('fas', 'star') %>
-            <%= icon('fas', 'star') %>
-            <%= icon('fas', 'star') %>
-            <%= icon('fas', 'star') %>
-            <%= icon('far', 'star') %>
+          <%= link_to "Add review", new_shop_shopreview_path(@shop) %>
+          <% @shop.shopreviews.last(2).each do |review| %>
+          <div class="fake-review mt-4">
+            <div class="rating-div d-flex align-items-center">
+              <p class="text-secondary my-0 mr-2"><%= review.user.first_name %> -</p>
+              <% review.rating.times do %>
+                <i class="fas fa-star"></i>
+              <% end %>
+              <% (5 - review.rating).times do %>
+                <i class="far fa-star"></i>
+              <% end %>
+            </div>
           </div>
+          <% end %>
         </div>
       </div>
     </div>
