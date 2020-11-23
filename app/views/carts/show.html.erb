@@ -1,8 +1,8 @@
 <h2 class="border-bottom pb-3 mb-4">Your shopping cart</h2>
 
-<ul class="list-group list-group-flush border-bottom pb-4">
-  <div class="list-group-item">
-    <div class="row text-right">
+<ul class="list-group list-group-flush pb-4 rounded">
+  <div class="list-group-item pb-0">
+    <div class="row text-right font-weight-bold">
       <div class="col-4 text-left">
         <p>Product</p>        
       </div>
@@ -22,7 +22,7 @@
   </div>
   <% total_price = 0 %>
   <% @cart.cart_products.order(created_at: :desc).each do |cart_product| %>
-    <div class="list-group-item">
+    <div class="list-group-item pb-0">
       <div class="row text-right">
         <div class="col-4 text-left">
           <p><%= link_to cart_product.product.name, shop_product_path(cart_product.product.shop, cart_product.product) %></p>        
@@ -32,9 +32,10 @@
         </div>
         <div class="col-2">
           <p>
-          <%= link_to icon('fas', 'minus-circle'), remove_from_cart_path(cart_product), method: :delete, data: { confirm: 'Are you sure?'}, remote: true %> 
-          <%= cart_product.quantity  %> 
-          <%= link_to icon('fas', 'plus-circle'), add_to_cart_path(cart_product.product), method: :post, remote: true %></p>        
+            <%= link_to icon('fas', 'minus-circle fa-lg'), remove_from_cart_path(cart_product), method: :delete, data: { confirm: 'Are you sure?'}, remote: true %> 
+            <span class="mx-1"><%= cart_product.quantity  %> </span>
+            <%= link_to icon('fas', 'plus-circle fa-lg'), add_to_cart_path(cart_product.product), method: :post, remote: true %>
+          </p>        
         </div>
         <div class="col-2">
           <p><%= number_with_precision(cart_product.product.price, precision: 2) %>€</p>
@@ -46,11 +47,11 @@
     </div>
   <% total_price += cart_product.quantity * cart_product.product.price %>
   <% end %>
-  <div class="list-group-item">
+  <div class="list-group-item pb-0">
     <div class="row text-right">
       <div class="col-10"></div>
       <div class="col-2">
-        <p>Total: <%= number_with_precision(total_price, precision: 2) %>€</p>
+        <p><strong>Total:</strong> <%= number_with_precision(total_price, precision: 2) %>€</p>
       </div>        
     </div>
   </div>
