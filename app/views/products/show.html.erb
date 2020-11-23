@@ -43,23 +43,32 @@
   <% end %>
   </section>
 <% end %>-->
-<h2>Reviews</h2>
-<button type="button" class="btn action-button" data-toggle="modal" data-target="#productreviewModal">
-  Add review
-</button>
-<% @product.productreviews.last(5).each do |review| %>
-  <div class="fake-review mt-4">
-    <div class="rating-div d-flex align-items-center">
-      <p class="text-secondary my-0 mr-2"><%= review.user.first_name %> -</p>
-      <% review.rating.times do %>
-        <i class="fas fa-star"></i>
-      <% end %>
-      <% (5 - review.rating).times do %>
-        <i class="far fa-star"></i>
-      <% end %>
+<section class="bg-white p-4 my-4 round">
+  <h2>Last reviews</h2>
+  <% if @product.productreviews.count == 0 %>
+  <p>There are no reviews yet, be the first one!</p>
+  <% end %>
+  <% @product.productreviews.last(5).each do |review| %>
+    <div class="fake-review py-2 mb-2 border-top">
+      <div class="rating-div d-flex align-items-center">
+        <p class="mb-1"><%= review.content %></p>
+      </div>
+      <div class="rating-div d-flex align-items-center">
+        <p class="text-secondary my-0 mr-2"><%= review.user.first_name %> -</p>
+        <% review.rating.times do %>
+          <i class="fas fa-star text-warning"></i>
+        <% end %>
+        <% (5 - review.rating).times do %>
+          <i class="far fa-star text-warning"></i>
+        <% end %>
+      </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+  <button type="button" class="btn action-button" data-toggle="modal" data-target="#productreviewModal">
+    Add review
+  </button>
+</section>
+
 
 
 <h2 class="my-4">See other products from <%= @product.shop.name %></h2>
@@ -79,21 +88,5 @@
 
 <!-- Modal for product review -->
 <div class="modal fade" id="productreviewModal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Add a review</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <%= simple_form_for [@product, @productreview] do |f| %>
-        <%= f.input :content %>
-        <%= f.input :rating, collection: (1..5).to_a, label: "Rate your experience" %>
-        <%= f.submit "Send your review" %>
-      <% end %>
-      </div>
-    </div>
-  </div>
+  <%= render  "shared/reviewmodal", arr: [@product, @productreview] %>
 </div>
