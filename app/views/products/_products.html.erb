@@ -1,5 +1,5 @@
 <% unless @shop.nil? %>
-  <%= link_to  icon('fas', 'plus', 'Add a product'), new_shop_product_path(@shop), class: "btn action-button" if current_user == @shop.user %>
+  <%= link_to  icon('fas', 'plus', 'Add a product'), new_shop_product_path(@shop), class: "btn btn-primary" if current_user == @shop.user %>
 <% end %>
 
 <div class="row mt-4">

@@ -1,5 +1,5 @@
 <%= link_to  "Back to all shops", shops_path %>
-<h1><%= @shop.name %> <%= link_to  icon('fas', 'edit'), edit_shop_path(@shop) if current_user == @shop.user %></h1>
+<h1><%= @shop.name %> <%= link_to  icon('fas', 'edit'), edit_shop_path(@shop), class: "text-warning" if current_user == @shop.user %></h1>
 <div class="shop-header">
   <div class="row">
     <div class="col-3 pr-0">

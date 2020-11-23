@@ -2,7 +2,7 @@
 <h1>
   <%= @product.name %>
   <% if @product.shop.user == current_user%>
-    <%= link_to  icon('fas', 'edit'), edit_shop_product_path(@product.shop, @product) %> <%= link_to  icon('fas', 'trash-alt'), product_path(@product) , method: :delete, data: { confirm: "Are you sure ?"} %></h1>
+    <%= link_to  icon('fas', 'edit'), edit_shop_product_path(@product.shop, @product), class: "text-warning" %> <%= link_to  icon('fas', 'trash-alt'), product_path(@product), class: "text-warning" , method: :delete, data: { confirm: "Are you sure ?"} %></h1>
   <% end %>
 </h1>
 
