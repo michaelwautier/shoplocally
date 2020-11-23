@@ -22,8 +22,12 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto d-flex align-items-center pr-3">
       <% if user_signed_in? %>
-        <li class="nav-item">
+        <li style="position:relative;" class="nav-item">
           <%= link_to  icon('fas', 'shopping-cart'), current_cart_path, class: "text-white secret" %>
+          <% number_of_items = current_user.carts.where(current_cart: true).last.cart_products.sum(:quantity) %>
+          <span style="position:absolute; top:-10px; right:-10px; font-size:0.6em" class="badge badge-pill badge-danger">
+            <%= number_of_items if number_of_items %>
+          </span>
         </li>
         <li class="nav-item dropdown">
           <% if current_user.avatar.attached? %>
