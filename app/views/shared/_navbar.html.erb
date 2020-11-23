@@ -24,7 +24,8 @@
       <% if user_signed_in? %>
         <li style="position:relative;" class="nav-item">
           <%= link_to  icon('fas', 'shopping-cart'), current_cart_path, class: "text-white secret" %>
-          <% number_of_items = current_user.carts.where(current_cart: true).last.cart_products.sum(:quantity) %>
+          <% carts =  %>
+          <% number_of_items = current_user.carts.where(current_cart: true).last ? current_user.carts.where(current_cart: true).last.cart_products.sum(:quantity) : 0%>
           <span style="position:absolute; top:-10px; right:-10px; font-size:0.6em" class="badge badge-pill badge-danger">
             <%= number_of_items if number_of_items %>
           </span>
