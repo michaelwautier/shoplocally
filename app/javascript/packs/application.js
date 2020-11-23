@@ -30,16 +30,17 @@ import "bootstrap";
 import { initMapbox } from '../plugins/init_mapbox';
 import { initStarRating } from '../plugins/init_star_rating';
 
+
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
-  // navigator.geolocation.getCurrentPosition((data) => {
-  //   let params = `?lat=${data.coords.latitude}&&lng=${data.coords.longitude}`
-  //   Turbolinks.visit(window.location.pathname+params);
-  // });
     initMapbox();
     initStarRating();
 });
 
+navigator.geolocation.getCurrentPosition((data) => {
+  let params = `?lat=${data.coords.latitude}&&lng=${data.coords.longitude}`
+  Turbolinks.visit(window.location.pathname+params);
+ });
 
 import "controllers"
