@@ -3,14 +3,14 @@
     <h5 class="text-secondary" data-target="checkout.heading">Step 4 of 4</h5>
   </div>
   <div class="progress w-75 mx-auto">
-    <div data-target="checkout.progress" class="progress-bar bg-info w-75" role="progressbar"></div>
+    <div data-target="checkout.progress" class="progress-bar bg-warning w-75" role="progressbar"></div>
   </div>
 <% else %>
   <div class="w-75 mx-auto text-center my-1">
     <h5 class="text-secondary" data-target="checkout.heading">Completed</h5>
   </div>
   <div class="progress w-75 mx-auto">
-    <div data-target="checkout.progress" class="progress-bar bg-info w-100" role="progressbar"></div>
+    <div data-target="checkout.progress" class="progress-bar bg-warning w-100" role="progressbar"></div>
   </div>
 <% end %>
 
@@ -104,7 +104,10 @@
 <% else %>
     </div>
   </ul>
-  <button id="pay" class="btn action-button">Pay</button>
+  <div class="d-flex justify-content-center">
+    <button id="pay" class="btn btn-lg action-button px-5">Pay</button>
+  </div>
+  
   <script src="https://js.stripe.com/v3/"></script> 
   <script>
     console.log('script loaded');
