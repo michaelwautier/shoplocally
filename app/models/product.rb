@@ -21,13 +21,13 @@ class Product < ApplicationRecord
       product_hash = Product.new
       product_hash.name = row[0]
       product_hash.description = row[1]
-      product_hash.price = row[2]
+      product_hash.price_cents = row[2].to_f * 100
       product_hash.tax = row[3]
       product_hash.stock = row[4]
       product_hash.category = Category.find_by(name: row[5])
       product_hash.ean = row[6]
       product_hash.shop = shop
-      product_hash.save!
+      product_hash.save
     end
   end
 end
