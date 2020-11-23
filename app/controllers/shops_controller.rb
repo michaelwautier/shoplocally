@@ -31,6 +31,7 @@ class ShopsController < ApplicationController
 
   def show
     @shop = Shop.find(params[:id])
+    @shopreview = Shopreview.new
   end
 
   def create
