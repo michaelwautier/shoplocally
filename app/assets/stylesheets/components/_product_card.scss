@@ -6,6 +6,13 @@
   &:hover {
     transform: scale(1.05);
   }
+  a {
+    color: $yellow;
+    transition: all ease 0.2s;
+  }
+  a:hover {
+    color: $blue
+  }
 }
 
 .product-card img {
