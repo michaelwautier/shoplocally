@@ -99,9 +99,11 @@
       </div>
     </div>
   <% end %>
-    </div>
+  </div>
 </ul>
 <% else %>
+    </div>
+  </ul>
   <button id="pay" class="btn action-button">Pay</button>
   <script src="https://js.stripe.com/v3/"></script> 
   <script>
@@ -113,4 +115,5 @@
           stripe.redirectToCheckout({ sessionId: '<%= order.checkout_session_id %>' });
     });
   </script>
+
 <% end %>
