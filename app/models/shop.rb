@@ -8,12 +8,17 @@ class Shop < ApplicationRecord
   has_many_attached :pictures
 
   has_many :products
-
+  geocoded_by :shop_address
+  after_validation :geocode
 
   validates :name, presence: true, length: { minimum: 2 }, uniqueness: true
   validates :description, presence: true, length: { minimum: 20 }
   validates :vat_number, format: { with: /BE\d{10}/ }
   # validates :vat_validation
+
+  def shop_address
+    self.address.full_address
+  end
 
   private
 

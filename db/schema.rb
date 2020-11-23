@@ -134,6 +134,8 @@ ActiveRecord::Schema.define(version: 2020_11_21_130132) do
     t.string "vat_number"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.float "longitude"
+    t.float "latitude"
     t.index ["address_id"], name: "index_shops_on_address_id"
     t.index ["user_id"], name: "index_shops_on_user_id"
   end

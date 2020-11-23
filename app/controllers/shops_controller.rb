@@ -6,7 +6,7 @@ class ShopsController < ApplicationController
       @shops = Shop.where(sql_query, query: "%#{params[:query]}%")
       @products = Product.where(sql_query, query: "%#{params[:query]}%")
     else
-      @shops = Shop.all
+      @shops = Shop.near('Brussels', 60)
     #   # @addresse = Address.near([current_user.address.latidude, 4.4433408], 2)
     #   @addresse = Address.near([params[:lat], params[:lng]], 20)
     #   if @addresse.empty?
@@ -15,11 +15,10 @@ class ShopsController < ApplicationController
     #   raise
     #   @shops = @shops.select { |shop| @addresse.include?(shop.address) }
     end
-    @addresses = Address.all
     @markers = @shops.map do |shop|
       {
-        lat: shop.address.latitude,
-        lng: shop.address.longitude,
+        lat: shop.latitude,
+        lng: shop.longitude,
         infoWindow: render_to_string(partial: "info_window", locals: { shop: shop })
       }
     end
@@ -69,6 +68,6 @@ class ShopsController < ApplicationController
   private
 
   def shop_params
-    params.require(:shop).permit(:name, :description, :vat_number, :address, :logo, pictures: [])
+    params.require(:shop).permit(:name, :description, :vat_number, :address, :logo, :longitude, :latitude, pictures: [])
   end
 end

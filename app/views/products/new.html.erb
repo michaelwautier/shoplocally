@@ -1,4 +1,8 @@
-<h2>Add a new product to <%= @shop.name %></h2>
-
-<%= render  "form" %>
-<%= link_to  "back to products", shop_products_path %>
+<div class="row">
+  <div class="col-12 col-md-6 offset-md-3">
+    <div class="form-user">
+      <h2>Add a new product to <%= @shop.name %></h2>
+      <%= render  "form" %>
+    </div>
+  </div>
+</div>
