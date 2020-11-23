@@ -1,5 +1,7 @@
 class Product < ApplicationRecord
   TAXES = [6, 12, 21]
+  monetize :price_cents
+
   belongs_to :shop
   belongs_to :category
   has_many :cart_products
