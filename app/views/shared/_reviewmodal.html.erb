@@ -1,0 +1,17 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">Add a review</h4>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <%= simple_form_for arr do |f| %>
+      <%= f.input :content, as: :text %>
+      <%= f.input :rating, collection: (1..5).to_a, label: "Rate your experience" %>
+      <%= f.submit "Send your review", class: "btn action-button w-100" %>
+    <% end %>
+    </div>
+  </div>
+</div>
