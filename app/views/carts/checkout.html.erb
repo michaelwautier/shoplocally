@@ -7,8 +7,8 @@
   </div>
   
   <div class="m-3 p-3 d-flex justify-content-center">
-    <button data-target="checkout.prev" data-action="click->checkout#prev" class="mx-2 btn btn-outline-dark">Previous</button>
-    <button data-target="checkout.next" data-action="click->checkout#next" class="mx-2 btn btn-outline-dark">Next</button>
+    <button data-target="checkout.prev" data-action="click->checkout#prev" class="text-dark mx-2 btn btn-outline-warning">Previous</button>
+    <button data-target="checkout.next" data-action="click->checkout#next" class="mx-2 btn btn-outline-primary">Next</button>
   </div>
 
   <div data-target="checkout.step1">
@@ -81,7 +81,7 @@
     <div data-target="checkout.step3" class="d-none">
       <div class="d-flex justify-content-center">
         <%= select_tag(:payment_id, raw('<option class="p-2" value="1">credit card</option><option class="p-2" value="2">paypal</option><option class="p-2" value="3">bancontact</option>'), class:"py-2 px-3 mx-3") %>
-        <%= f.submit 'Pay now', class:"mx-2 btn btn-outline-success" %>
+        <%= f.submit 'Pay now', class:"mx-2 btn btn-primary" %>
       </div>
     </div>
     <% end %>

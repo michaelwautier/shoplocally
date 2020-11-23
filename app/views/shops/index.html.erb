@@ -1,5 +1,5 @@
 <% if @products.nil? %>
-  <h2>All shops near you <%= link_to icon('fas', 'plus'), new_shop_path if current_user %></h2>
+  <h2>All shops near you <%= link_to icon('fas', 'plus'), new_shop_path, class: "text-warning" if current_user %></h2>
 <% else %>
   <h2>Results for '<%= params[:query] %>'</h2>
   <div class="row">

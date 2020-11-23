@@ -58,6 +58,6 @@
 </ul>
 
 <div class="d-flex justify-content-between mt-4">
-  <%= link_to 'Back', :back, class: "btn btn-warning" if @cart.cart_products.count > 0 %>
-  <%= link_to 'Proceed to checkout', cart_checkout_path, class: "btn btn-success" if @cart.cart_products.count > 0 %>
+  <%= link_to 'Back', :back, class: "btn btn-outline-warning" if @cart.cart_products.count > 0 %>
+  <%= link_to 'Proceed to checkout', cart_checkout_path, class: "btn btn-primary" if @cart.cart_products.count > 0 %>
 </div>
