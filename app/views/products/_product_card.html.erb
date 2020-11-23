@@ -11,7 +11,7 @@
         <p><%= product.description.length > 37 ? "#{product.description.first(37)} (...)" : product.description %></p>
       </div>
       <div class="text-right">
-        <h2 class="product-card-pricing"><%= number_with_precision(product.price, precision: 2) %>€</h2>
+        <h2 class="product-card-pricing"><%= humanized_money_with_symbol(product.price) %></h2>
          <%= link_to icon('fas', 'cart-plus'), add_to_cart_path(product), method: :post %>
       </div>
     </div>

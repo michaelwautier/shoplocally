@@ -3,6 +3,15 @@
     <div class="form-user">
       <h2>Add a new product to <%= @shop.name %></h2>
       <%= render  "form" %>
+      <h2>Or import with a CSV file</h2>
+      <%= simple_form_for([@shop, @product], remote: true ) do |f| %>
+        <div class="form-group">
+            <%= f.label :file, "Upload CSV File" %>
+            <%= f.file_field :file, class: 'form-control-file', required: true %>
+        </div>
+        <%= f.button :submit, "Upload CSV", class: 'btn btn-primary' %>
+      <% end %>
+
     </div>
   </div>
 </div>

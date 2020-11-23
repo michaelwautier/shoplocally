@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 2020_11_23_135342) do
     t.bigint "address_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "checkout_session_id"
     t.index ["address_id"], name: "index_orders_on_address_id"
     t.index ["cart_id"], name: "index_orders_on_cart_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
@@ -124,7 +125,6 @@ ActiveRecord::Schema.define(version: 2020_11_23_135342) do
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.float "price"
     t.integer "stock"
     t.string "ean"
     t.float "tax"
@@ -133,6 +133,7 @@ ActiveRecord::Schema.define(version: 2020_11_23_135342) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "price_in_cents"
+    t.integer "price_cents", default: 0, null: false
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["shop_id"], name: "index_products_on_shop_id"
   end
