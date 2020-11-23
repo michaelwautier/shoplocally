@@ -6,14 +6,7 @@ class ShopsController < ApplicationController
       @shops = Shop.where(sql_query, query: "%#{params[:query]}%")
       @products = Product.where(sql_query, query: "%#{params[:query]}%")
     else
-      @shops = Shop.near('Brussels', 60)
-    #   # @addresse = Address.near([current_user.address.latidude, 4.4433408], 2)
-    #   @addresse = Address.near([params[:lat], params[:lng]], 20)
-    #   if @addresse.empty?
-    #     @addresse = Address.near([params[:lat], params[:lng]], 100)
-    #   end
-    #   raise
-    #   @shops = @shops.select { |shop| @addresse.include?(shop.address) }
+      @shops = params[:lat].present? ? Shop.near([params[:lat], params[:lng]], 60) : Shop.all
     end
     @markers = @shops.map do |shop|
       {
