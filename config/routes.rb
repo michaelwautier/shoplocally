@@ -19,7 +19,10 @@ Rails.application.routes.draw do
   # shop independent product actions
   post 'products/:id', to: 'products#add_to_cart', as: 'add_to_cart'
   delete 'products/:id', to: 'products#remove_from_cart', as: 'remove_from_cart'
-  resources :products, only: [:destroy, :update]
+  resources :products, only: [:destroy, :update] do
+    resources :productreviews
+  end
+
 
   # cart actions
   get 'cart/', to: 'carts#show', as: 'current_cart'
