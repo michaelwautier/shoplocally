@@ -38,10 +38,10 @@
           </p>        
         </div>
         <div class="col-2">
-          <p><%= number_with_precision(cart_product.product.price, precision: 2) %>€</p>
+          <p><%= humanized_money_with_symbol(cart_product.product.price) %></p>
         </div>
         <div class="col-2">
-          <p><%= number_with_precision(cart_product.quantity * cart_product.product.price, precision: 2) %>€</p>
+          <p><%= humanized_money_with_symbol(cart_product.quantity * cart_product.product.price) %></p>
         </div>        
       </div>
     </div>
@@ -51,7 +51,7 @@
     <div class="row text-right">
       <div class="col-10"></div>
       <div class="col-2">
-        <p><strong>Total:</strong> <%= number_with_precision(total_price, precision: 2) %>€</p>
+        <p><strong>Total:</strong> <%= humanized_money_with_symbol(total_price) %></p>
       </div>        
     </div>
   </div>

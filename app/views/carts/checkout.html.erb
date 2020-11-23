@@ -1,6 +1,6 @@
 <div data-controller="checkout">
   <div class="w-75 mx-auto text-center my-1">
-    <h5 class="text-secondary" data-target="checkout.heading">Step 1 of 3</h5>
+    <h5 class="text-secondary" data-target="checkout.heading">Step 1 of 4</h5>
   </div>
   <div class="progress w-75 mx-auto">
     <div data-target="checkout.progress" class="progress-bar bg-info" role="progressbar"></div>
@@ -46,10 +46,10 @@
 
         </div>
         <div class="col-2">
-          <p><%= number_with_precision(cart_product.product.price, precision: 2) %>€</p>
+          <p><%= humanized_money_with_symbol(cart_product.product.price) %></p>
         </div>
         <div class="col-2">
-          <p><%= number_with_precision(cart_product.quantity * cart_product.product.price, precision: 2) %>€</p>
+          <p><%= humanized_money_with_symbol(cart_product.quantity * cart_product.product.price) %></p>
         </div>
       </div>
     </div>
@@ -58,7 +58,7 @@
     <div class="list-group-item">
       <div class="row text-right">
         <div class="col-2 offset-10">
-          <p><strong>Total:</strong> <%= number_with_precision(total_price, precision: 2) %>€</p>
+          <p><strong>Total:</strong> <%= humanized_money_with_symbol(total_price) %></p>
         </div>
       </div>
     </div>
@@ -80,8 +80,7 @@
 
     <div data-target="checkout.step3" class="d-none">
       <div class="d-flex justify-content-center">
-        <%= select_tag(:payment_id, raw('<option class="p-2" value="1">credit card</option><option class="p-2" value="2">paypal</option><option class="p-2" value="3">bancontact</option>'), class:"py-2 px-3 mx-3") %>
-        <%= f.submit 'Pay now', class:"mx-2 btn btn-outline-success" %>
+        <%= f.submit 'Create order', class:"mx-2 btn btn-outline-success" %>
       </div>
     </div>
     <% end %>

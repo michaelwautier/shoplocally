@@ -1,0 +1,116 @@
+<% unless order.status == 'paid' %>
+  <div class="w-75 mx-auto text-center my-1">
+    <h5 class="text-secondary" data-target="checkout.heading">Step 4 of 4</h5>
+  </div>
+  <div class="progress w-75 mx-auto">
+    <div data-target="checkout.progress" class="progress-bar bg-info w-75" role="progressbar"></div>
+  </div>
+<% else %>
+  <div class="w-75 mx-auto text-center my-1">
+    <h5 class="text-secondary" data-target="checkout.heading">Completed</h5>
+  </div>
+  <div class="progress w-75 mx-auto">
+    <div data-target="checkout.progress" class="progress-bar bg-info w-100" role="progressbar"></div>
+  </div>
+<% end %>
+
+<ul class="list-group list-group-flush border-bottom pb-3 my-3">
+  <div class="order-header">
+    <div class="row">
+      <div class="col-2">
+        <p class="m-0">Order n° : #SL00<%= order.id %></p>
+      </div>
+      <div class="col-2">
+        <p class="m-0">Status : <%= order.status %></p>
+      </div>
+      <div class="col-8">
+        <p class="m-0">Placed on : <%= order.created_at.strftime("%d/%m/%Y at %H:%M") %></p>
+      </div>
+    </div>    
+  </div>
+    <div class="list-group-item">
+      <div class="row text-right">
+        <div class="col-2 text-left font-weight-bold">
+          <p>Product</p>
+        </div>
+        <div class="col-3 text-left font-weight-bold">
+          <p>Shop</p>
+        </div>
+        <div class="col-1 text-center font-weight-bold">
+          <p>Quantity</p>
+        </div>
+        <div class="col-2 font-weight-bold">
+          <p>Unit Price</p>
+        </div>
+        <div class="col-2 font-weight-bold">
+          <p>Taxes</p>
+        </div>
+        <div class="col-2 font-weight-bold">
+          <p>Total</p>
+        </div>
+      </div>
+    </div>
+    <% total_price = 0 %>
+    <% order.cart.cart_products.each do |cart_product| %>
+      <div class="list-group-item">
+        <div class="row text-right">
+          <div class="col-2 text-left">
+            <p><%= link_to cart_product.product.name, shop_product_path(cart_product.product.shop, cart_product.product) %></p>
+          </div>
+          <div class="col-3 text-left">
+            <p><%= cart_product.product.shop.name %></p>
+          </div>
+          <div class="col-1 text-center">
+            <p><%= cart_product.quantity%></p>
+          </div>
+          <div class="col-2">
+            <p><%= humanized_money_with_symbol(cart_product.product.price) %></p>
+          </div>
+          <div class="col-2">
+            <p><%= cart_product.product_tax.round %>%</p>
+          </div>
+          <div class="col-2">
+            <p><%= humanized_money_with_symbol(cart_product.quantity * cart_product.product.price) %></p>
+          </div>
+        </div>
+      </div>
+    <% total_price += cart_product.quantity * cart_product.product.price %>
+    <% end %>
+    <div class="list-group-item">
+      <div class="row text-right">
+        <div class="col-2 offset-10">
+          <p>Total: <%= humanized_money_with_symbol(total_price)%></p>
+        </div>
+      </div>
+      <div class="row border-bottom py-2 my-2">
+        <div class="col-5 font-weight-bold">Shop</div>
+        <div class="col-2 text-left font-weight-bold">Delivery status</div>
+      </div>
+
+
+<% if order.status == 'paid' %>
+<% order.deliveries.each do |delivery| %>
+    <div class="row text-right">
+      <div class="col-5 text-left">
+        <p> <%= link_to delivery.shop.name, shop_path(delivery.shop)  %> </p>
+      </div>
+      <div class="col-2 text-left">
+        <p> <%=link_to delivery.status, order_delivery_path(order, delivery) %> </p>
+      </div>
+    </div>
+  <% end %>
+    </div>
+</ul>
+<% else %>
+  <button id="pay" class="btn action-button">Pay</button>
+  <script src="https://js.stripe.com/v3/"></script> 
+  <script>
+    console.log('script loaded');
+    const paymentButton = document.getElementById('pay');
+
+    paymentButton.addEventListener('click', () => {
+          const stripe = Stripe('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>');
+          stripe.redirectToCheckout({ sessionId: '<%= order.checkout_session_id %>' });
+    });
+  </script>
+<% end %>

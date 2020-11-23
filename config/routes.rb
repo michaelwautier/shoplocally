@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     resources :delivery_options, only: [:index, :new, :create, :edit]
   end
 
+  mount StripeEvent::Engine, at: '/stripe-webhooks'
+
   # orders and deliveries
   resources :orders, only: [:index, :show] do
     resources :deliveries, only: [:show]

@@ -21,7 +21,7 @@
           <p class="m-0"><%= @product.description %></p>
         </div>
         <div class="col-4 border-left border-white text-center d-flex flex-column justify-content-center">
-          <h3><%= number_with_precision(@product.price, precision: 2) %>€</h3>
+          <h3><%= humanized_money_with_symbol(@product.price) %></h3>
           <% if @product.stock <= 0 %>
             <p>Sorry, this product is currently out of stock</p>
           <% else %>
