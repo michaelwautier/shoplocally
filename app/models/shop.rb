@@ -8,6 +8,7 @@ class Shop < ApplicationRecord
   has_many_attached :pictures
 
   has_many :products
+  has_many :shopreviews
   geocoded_by :shop_address
   after_validation :geocode
 

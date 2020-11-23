@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'shops#index'
   resources :shops do
+    resources :shopreviews
     resources :products, except: [:destroy, :update]
     resources :delivery_options, only: [:index, :new, :create, :edit]
   end
