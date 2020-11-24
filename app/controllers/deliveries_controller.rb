@@ -18,17 +18,22 @@ class DeliveriesController < ApplicationController
 
   def edit
     @delivery = Delivery.find(params[:id])
+    @vehicles = Vehicle.all
   end
 
   def update
     @delivery = Delivery.find(params[:id])
+    @vehicle = Vehicle.find_by(type_name: params[:delivery][:vehicle])
+    @delivery.vehicle = @vehicle
     @delivery.update(delivery_params)
     redirect_to owner_path(current_user)
   end
-  
+
   def show_for_delivery_guy
     @delivery = Delivery.find(params[:id])
   end
+
+
 
   private
 
