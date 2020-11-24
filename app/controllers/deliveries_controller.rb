@@ -16,7 +16,23 @@ class DeliveriesController < ApplicationController
     @delivery = Delivery.find(params[:id])
   end
 
+  def edit
+    @delivery = Delivery.find(params[:id])
+  end
+
+  def update
+    @delivery = Delivery.find(params[:id])
+    @delivery.update(delivery_params)
+    redirect_to owner_path(current_user)
+  end
+  
   def show_for_delivery_guy
     @delivery = Delivery.find(params[:id])
+  end
+
+  private
+
+  def delivery_params
+    params.require(:delivery).permit(:status)
   end
 end

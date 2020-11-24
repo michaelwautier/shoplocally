@@ -1,0 +1,62 @@
+<h1>Your Shops</h1>
+
+<div class="row">
+  <% current_user.shops.each do |shop| %>
+    <div class="col-12 col-md-6 col-xl-4 mb-4">
+      <%= link_to shop_path(shop) do %>
+        <div class="card-shop">
+          <% if shop.logo.attached? %>
+            <%= cl_image_tag shop.logo.key, height: 150, width: 150, crop: :fill, class: "shop-logo" %>
+          <% elsif shop.pictures.attached? %>
+            <%= cl_image_tag shop.pictures.first.key, height: 150, width: 150, crop: :fill, class: "shop-picture" %>
+          <% end %>
+          <div class="card-shop-infos text-dark">
+            <h2><%= shop.name %></h2>
+            <p><%= shop.description.length > 40 ? "#{shop.description.first(40)} (...)" : shop.description %></p>
+            <p><%= shop.address.full_address %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<h2>Deliveries from your shop:</h2>
+<% @deliveries.each do |delivery| %>
+<div class="card my-3">
+  <div class="card-header d-flex justify-content-between">
+  <h5 class="m-0"> Shop: <%= delivery.shop.name %></h5>
+  <p class="m-0">#SL00<%= delivery.order.id %></p>
+  </div>
+  <div class="card-body">
+
+    <% @cart_products = delivery.cart_products %>
+    <% render @cart_products %>
+
+    <div class="row mt-1">
+      <div class="col">
+        <h5 class="card-title"><strong>Status:</strong> <%= delivery.status %>
+          <%= simple_form_for delivery do |f| %>
+            <%= f.input :status, placeholder: "Change status" %>
+            <%= f.button :submit, class: "btn btn-primary" %>
+          <% end %>
+        </h5>
+      </div>
+      <div class="col">
+        <p class="card-text"><strong>Type of vehicle:</strong> <%= delivery.vehicle ? delivery.vehicle.type : 'Not yet specified' %></p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <p class="card-text"><strong>Shop address:</strong> <%= delivery.shop.address.full_address %></p>
+      </div>
+        <div class="col">
+          <p class="card-text"><strong>Delivery address:</strong> <%= delivery.order.user.address.full_address %></P>
+        </div>
+      </div>
+
+  </div>
+</div>
+<% end %>
+
