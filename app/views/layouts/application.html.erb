@@ -31,7 +31,7 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
   </head>
 
-  <body>
+  <body style="<%= 'background-color:white;' if request.path == '/' %>">
     <%= render 'shared/navbar' %>
     <%= render 'shared/flashes' %>
 
