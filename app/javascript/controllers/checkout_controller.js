@@ -16,8 +16,8 @@ export default class extends Controller {
     for (let index = 0; index < steps.length; index++) {
       ((index + 1) === currentStep) ? steps[index].classList.remove("d-none") : steps[index].classList.add("d-none");
     }
-    (currentStep === 1) ? this.prevTarget.classList.add("disabled") : this.prevTarget.classList.remove("disabled");
-    (currentStep === steps.length) ? this.nextTarget.classList.add("disabled") : this.nextTarget.classList.remove("disabled");
+    (currentStep === 1) ? this.prevTarget.classList.add("d-none") : this.prevTarget.classList.remove("d-none");
+    (currentStep === steps.length) ? this.nextTarget.classList.add("d-none") : this.nextTarget.classList.remove("d-none");
     this.progressTarget.style.width = `${currentStep * (100 / (steps.length + 1))}%`
     this.headingTarget.innerHTML = `Step ${currentStep} of ${steps.length + 1}` 
   }
