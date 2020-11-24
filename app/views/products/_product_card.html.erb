@@ -1,5 +1,5 @@
 <%= link_to shop_product_path(product.shop, product), class: "text-dark" do %>
-  <div class="product-card">
+  <div class="product-card h-100">
     <% if product.photos.attached? %>
       <%= cl_image_tag product.photos.first.key %>
     <% else %>

@@ -1,5 +1,32 @@
 <%= link_to  "Back", :back %>
-<h2><%= @category.name.capitalize %> items</h2>
+<h2>Most popular <%= @category.name %> shops around you</h2>
+<div class="row">
+  <% @shops.each do |shop| %>
+    <div class="col-12 col-md-6 col-xl-4 mb-4">
+      <%= link_to shop_path(shop) do %>
+        <div class="card-shop">
+          <% if shop.logo.attached? %>
+            <%= cl_image_tag shop.logo.key, height: 150, width: 150, crop: :fill, class: "shop-logo" %>
+          <% elsif shop.pictures.attached? %>
+            <%= cl_image_tag shop.pictures.first.key, height: 150, width: 150, crop: :fill, class: "shop-picture" %>
+          <% end %>
+          <div class="card-shop-infos text-dark">
+            <h2><%= shop.name %></h2>
+            <p><%= shop.description.length > 40 ? "#{shop.description.first(40)} (...)" : shop.description %></p>
+            <p><%= shop.address.full_address %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
 
-<%= render 'products/products', products: @products %>
+<h4><%= @category.name.capitalize %> products</h4>
+<div class="row mt-4">
+  <% @products.each do |product| %>
+    <div class="col-6 col-md-4 col-xl-4 mb-3">
+      <%= render 'products/product_card', product: product %>
+    </div>
+  <% end %>
+</div>
 
