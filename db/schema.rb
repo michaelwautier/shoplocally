@@ -140,6 +140,52 @@ ActiveRecord::Schema.define(version: 2020_11_24_100815) do
     t.index ["shop_id"], name: "index_products_on_shop_id"
   end
 
+  create_table "review_products", force: :cascade do |t|
+    t.string "content"
+    t.integer "rating"
+    t.bigint "product_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_review_products_on_product_id"
+    t.index ["user_id"], name: "index_review_products_on_user_id"
+  end
+
+  create_table "review_shops", force: :cascade do |t|
+    t.string "content"
+    t.integer "rating"
+    t.bigint "shop_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["shop_id"], name: "index_review_shops_on_shop_id"
+    t.index ["user_id"], name: "index_review_shops_on_user_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.string "content"
+    t.integer "rating"
+    t.bigint "user_id", null: false
+    t.bigint "shop_id", null: false
+    t.bigint "product_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_reviews_on_product_id"
+    t.index ["shop_id"], name: "index_reviews_on_shop_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
+  create_table "shop_reviews", force: :cascade do |t|
+    t.string "content"
+    t.integer "rating"
+    t.bigint "shop_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["shop_id"], name: "index_shop_reviews_on_shop_id"
+    t.index ["user_id"], name: "index_shop_reviews_on_user_id"
+  end
+
   create_table "shopreviews", force: :cascade do |t|
     t.string "content"
     t.integer "rating"
@@ -208,6 +254,15 @@ ActiveRecord::Schema.define(version: 2020_11_24_100815) do
   add_foreign_key "productreviews", "users"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "shops"
+  add_foreign_key "review_products", "products"
+  add_foreign_key "review_products", "users"
+  add_foreign_key "review_shops", "shops"
+  add_foreign_key "review_shops", "users"
+  add_foreign_key "reviews", "products"
+  add_foreign_key "reviews", "shops"
+  add_foreign_key "reviews", "users"
+  add_foreign_key "shop_reviews", "shops"
+  add_foreign_key "shop_reviews", "users"
   add_foreign_key "shopreviews", "shops"
   add_foreign_key "shopreviews", "users"
   add_foreign_key "shops", "addresses"

@@ -37,7 +37,7 @@
       <div class="col">
         <h5 class="card-title"><strong>Status:</strong> <%= delivery.status %>
           <%= simple_form_for delivery do |f| %>
-            <%= f.input :status, placeholder: "Change status" %>
+            <%= f.select :status, placeholder: "Change status" %>
             <%= f.button :submit, class: "btn btn-primary" %>
           <% end %>
         </h5>
