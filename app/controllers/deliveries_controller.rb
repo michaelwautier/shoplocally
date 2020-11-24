@@ -9,6 +9,7 @@ class DeliveriesController < ApplicationController
     elsif current_user.roles.include?(User::ROLES[0])
       @deliveries = Delivery.where(vehicle_id: current_user.vehicle_id).where(status: 'pending')
     end
+    @my_deliveries = Delivery.where('user_id = ? AND status != ?', current_user.id, 'delivered')
   end
 
   def show

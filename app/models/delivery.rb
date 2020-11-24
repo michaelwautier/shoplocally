@@ -1,4 +1,5 @@
 class Delivery < ApplicationRecord
+  STATUS = %w[pending assigned in_transport undeliverable delivered]
   belongs_to :order
   belongs_to :shop
   belongs_to :user, optional: true
