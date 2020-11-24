@@ -36,14 +36,15 @@
     <div class="row mt-1">
       <div class="col">
         <h5 class="card-title"><strong>Status:</strong> <%= delivery.status %>
-          <%= simple_form_for delivery do |f| %>
-            <%= f.select :status, placeholder: "Change status" %>
+          <%= simple_form_for delivery, remote: true do |f| %>
+            <%= f.input :status, collection: Delivery::STATUS %>
+            <%= f.input :vehicle, collection: Vehicle::TYPES %>
             <%= f.button :submit, class: "btn btn-primary" %>
           <% end %>
         </h5>
       </div>
       <div class="col">
-        <p class="card-text"><strong>Type of vehicle:</strong> <%= delivery.vehicle ? delivery.vehicle.type : 'Not yet specified' %></p>
+        <p class="card-text"><strong>Type of vehicle:</strong> <%= delivery.vehicle ? delivery.vehicle.type_name : 'Not yet specified' %></p>
       </div>
     </div>
 
