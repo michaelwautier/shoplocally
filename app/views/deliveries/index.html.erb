@@ -1,0 +1,39 @@
+<h1>Pending deliveries</h1>
+
+<div class="row font-weight-bold py-2">
+    <div class="col-1">
+      <span>Id</span> 
+    </div>
+    <div class="col-1">
+      <span>Status</span> 
+    </div>
+    <div class="col-2">
+      <span>Shop</span> 
+    </div>
+    <div class="col-4">
+      <span>Pickup address</span> 
+    </div>
+        <div class="col-4">
+      <span>Delivery address</span> 
+    </div>
+  </div>
+
+<% @deliveries.each do |delivery| %>
+  <div class="row py-1">
+    <div class="col-1">
+      <span><%= delivery.id %></span> 
+    </div>
+       <div class="col-1">
+      <span><%= delivery.status %></span> 
+    </div>
+    <div class="col-2">
+      <span><%= delivery.shop.name %></span> 
+    </div>
+    <div class="col-4">
+      <span><%= delivery.shop.address.full_address %></span> 
+    </div>
+        <div class="col-4">
+      <span><%= delivery.full_address %></span> 
+    </div>
+  </div>
+<% end %>
