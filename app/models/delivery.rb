@@ -1,5 +1,5 @@
 class Delivery < ApplicationRecord
-  STATUS = %w[pending delivery_pickup customer_pickup assigned in_transport undeliverable delivered]
+  STATUS = %w[pending_delivery_pickup pending_customer_pickup assigned in_transport undeliverable delivered]
   belongs_to :order
   belongs_to :shop
   belongs_to :user, optional: true
