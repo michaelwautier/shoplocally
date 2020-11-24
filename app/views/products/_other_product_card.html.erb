@@ -1,0 +1,14 @@
+<%= link_to shop_product_path(product.shop, product) do %>
+  <div class="card-other-product text-dark">
+    <% if product.photos.attached? %>
+      <%= cl_image_tag product.photos.first.key %>
+    <% else %>
+      <img src="https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081" alt="">
+    <% end %>
+    <div class="card-other-product-infos">
+      <h2><%= product.name.length > 24 ? product.name.first(24) : product.name %></h2>
+      <p><%= product.description.length > 37 ? "#{product.description.first(37)} (...)" : product.description %></p>
+      <h2 class="product-card-pricing mt-2 mb-0"><%= humanized_money_with_symbol(product.price) %></h2>
+    </div>
+  </div>
+<% end %>

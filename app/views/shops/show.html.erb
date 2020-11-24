@@ -22,6 +22,9 @@
           <p>Average review :</p>
           <% if @shop.shopreviews.count == 0 %>
             <p>There are no reviews yet, be the first one!</p>
+            <button type="button" class="btn action-button" data-toggle="modal" data-target="#shopreviewModal">
+              Add review
+            </button>
           <% else %>
             <% sum = 0 %>
             <% @shop.shopreviews.each do |review| %>
@@ -44,7 +47,7 @@
 </div>
 
 <section class="bg-white p-4 my-4 round">
-  <h2>Last reviews</h2>
+  <h3>Last reviews</h3>
   <% if @shop.shopreviews.count == 0 %>
   <p>There are no reviews yet, be the first one!</p>
   <% end %>
@@ -69,7 +72,7 @@
   </button>
 </section>
 
-<h2 class="my-4 pb-2 border-bottom">Best sellers from <%= @shop.name %></h2>
+<h4 class="my-4 pb-2 border-bottom">Best sellers from <%= @shop.name %></h4>
 <%= render 'products/products', products: @shop.products %>
 
 
