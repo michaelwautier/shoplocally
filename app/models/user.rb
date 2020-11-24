@@ -8,6 +8,7 @@ class User < ApplicationRecord
   belongs_to :vehicle, optional: true
   has_many   :carts
   has_many   :deliveries
+  has_many   :shops
   has_one_attached :avatar
 
   validates :first_name, length: { minimum: 2 }, presence: true, on: [:update]

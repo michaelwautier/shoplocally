@@ -59,6 +59,12 @@ class ShopsController < ApplicationController
     redirect_to shop_path(@shop)
   end
 
+  def owner
+    @deliveries = Delivery.select do |delivery|
+      current_user.shops.ids.include?(delivery.shop_id)
+    end
+  end
+
   private
 
   def shop_params

@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     resources :deliveries, only: [:show]
   end
 
+  resources :deliveries, only: [:index, :edit, :update]
+
   # products by category
   get 'categories/:id', to: 'categories#show'
 
@@ -24,6 +26,8 @@ Rails.application.routes.draw do
   resources :products, only: [:destroy, :update] do
     resources :productreviews
   end
+
+  get 'owner/', to: 'shops#owner', as: 'owner'
 
 
   # cart actions
