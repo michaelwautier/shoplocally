@@ -1,4 +1,4 @@
-<%= simple_form_for @shop do |f| %>
+<%= simple_form_for @shop, remote: true do |f| %>
   <%= f.input :name, placeholder: "Bio-Planet" %>
   <%= f.input :description, placeholder: "Find seasonal products" %>
   <%= f.input :vat_number, label: "VAT N°", placeholder: "BE1234567890" %>

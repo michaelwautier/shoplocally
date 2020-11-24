@@ -1,11 +1,21 @@
 class Delivery < ApplicationRecord
+  STATUS = %w[pending assigned in_transport undeliverable delivered]
   belongs_to :order
   belongs_to :shop
   belongs_to :user, optional: true
   belongs_to :vehicle, optional: true
 
+  validates :shop, presence: true
+  validates :order, presence: true
+
+  geocoded_by :full_address
+  after_validation :geocode
+
   def cart_products
-    cart_product = order.cart.cart_products
-    cart_products = cart_product.select { |line| line.product.shop == shop }
+    order.cart.cart_products.select { |line| line.product.shop == shop }
+  end
+
+  def full_address
+    order.address.full_address
   end
 end
