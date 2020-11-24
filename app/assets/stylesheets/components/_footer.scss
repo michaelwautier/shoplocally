@@ -3,14 +3,8 @@
 //   justify-content: space-between;
 // }
 
-
 .footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 10px;
+  padding-top: 15px;
   color: #ef6d34;
   background-color: #333;
   flex-wrap: wrap;
@@ -23,23 +17,9 @@
   ul li a {
     color: #fff;
     font-size: 0.8em;
-  }
-
-  ul li a:hover {
-    color: #ef6d34;
-    font-size: 0.8em;
-  }
-}
-
-.w200 {
-  width: 120px;
-}
-
-
-// Small devices (landscape phones, 576px and up)
-@media (max-width: 576px) {
-  .footer {
-    text-align: center;
-    justify-content: center;
+    &:hover {
+      color: #ef6d34;
+      font-size: 0.8em;
+    }
   }
 }
