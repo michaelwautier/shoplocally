@@ -1,0 +1,71 @@
+<h1>My deliveries</h1>
+<% @my_deliveries.each do |delivery| %>
+  <div class="card my-3">
+    <div class="d-flex">
+      <h5 class="card-header">Shop: <%= delivery.shop.name %></h5>
+     </div>
+    
+    <div class="card-body">
+      
+      <div class="row mt-1">
+        <div class="col">
+     
+          <h5 class="card-title"><strong>Status:</strong> <%= delivery.status %></h5>
+        </div>
+        <div class="col">
+          <p class="card-text"><strong>Type of vehicle:</strong> <%= delivery.vehicle ? delivery.vehicle.type : 'Not yet specified' %></p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <p class="card-text"><strong>Shop address:</strong> <%= delivery.shop.address.full_address %></p>
+        </div>
+        <div class="col">
+          <p class="card-text"><strong>Delivery address:</strong> <%= delivery.order.user.address.full_address %></P>
+        </div>
+      </div>
+
+    </div>
+  </div>
+<% end %>
+
+<h2>Pending deliveries</h2>
+
+<div class="row font-weight-bold py-2">
+    <div class="col-1">
+      <span>Id</span> 
+    </div>
+    <div class="col-1">
+      <span>Status</span> 
+    </div>
+    <div class="col-2">
+      <span>Shop</span> 
+    </div>
+    <div class="col-3">
+      <span>Pickup address</span> 
+    </div>
+        <div class="col-3">
+      <span>Delivery address</span> 
+    </div>
+  </div>
+
+<% @deliveries.each do |delivery| %>
+  <div class="row py-1">
+    <div class="col-1">
+      <span><%= delivery.id %></span> 
+    </div>
+       <div class="col-1">
+      <span><%= delivery.status %></span> 
+    </div>
+    <div class="col-2">
+      <span><%= delivery.shop.name %></span> 
+    </div>
+    <div class="col-3">
+      <span><%= delivery.shop.address.full_address %></span> 
+    </div>
+        <div class="col-3">
+      <span><%= delivery.full_address %></span> 
+    </div>
+  </div>
+<% end %>

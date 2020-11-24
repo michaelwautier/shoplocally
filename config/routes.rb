@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   resources :orders, only: [:index, :show] do
     resources :deliveries, only: [:show]
   end
+  
+  resources :deliveries, only: [:index, :edit, :update]
 
   # products by category
   get 'categories/:id', to: 'categories#show'
