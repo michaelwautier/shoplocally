@@ -1,6 +1,8 @@
 // Specific CSS for your home-page
-.container {
-  min-height: 85vmin;
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .round {

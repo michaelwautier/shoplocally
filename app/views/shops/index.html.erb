@@ -1,7 +1,31 @@
+<div class="row">
+  <div class="col-12 col-lg-6">
+    <h2>Top selling categories</h2>
+    <div class="row">
+      <% Category.all.each do |category| %>
+        <div class="col-6 col-lg-6 mb-4">
+          <%= link_to "categories/#{category.id}" do %>
+            <%= render  "categories/card", category: category %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-12 col-lg-6">
+    <% unless @shops.empty? %>
+      <h2>Explore the shops around you</h2>
+        <div id="map"
+            style="width: 100%; height: 600px;"
+            data-markers="<%= @markers.to_json %>"
+            data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+    <% end %>
+  </div>
+</div>
+
 <% if @products.nil? %>
   <h2>All shops near you <%= link_to icon('fas', 'plus'), new_shop_path, class: "text-warning" if current_user %></h2>
 <% else %>
-  <h2>Results for '<%= params[:query] %>'</h2>
+  <h2>Products result for '<%= params[:query] %>'</h2>
   <div class="row">
   <% @products&.each do |product| %>
       <div class="col-12 col-md-6 col-xl-4 mb-3">
@@ -9,6 +33,10 @@
       </div>
   <% end %>
   </div>
+  <h2>Shops result for '<%= params[:query] %>'</h2>
+  <% if @shops.empty? %>
+    <p>No results for '<%= params[:query] %>'</p>
+  <% end %>
 <% end %>
 <div class="row">
   <% @shops.each do |shop| %>
@@ -30,22 +58,3 @@
     </div>
   <% end %>
 </div>
-
-<h2>Browse categories</h2>
-
-<div class="row">
-  <% Category.all.each do |category| %>
-    <div class="col-12 col-md-4 mb-4">
-      <%= link_to "categories/#{category.id}" do %>
-        <%= render  "categories/card", category: category %>
-      <% end %>
-    </div>
-  <% end %>
-</div>
-<% unless @shops.empty? %>
-<h2>Explore the shops around you</h2>
-  <div id="map"
-      style="width: 100%; height: 600px;"
-      data-markers="<%= @markers.to_json %>"
-      data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-<% end %>
