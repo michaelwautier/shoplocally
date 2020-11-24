@@ -8,14 +8,14 @@
 
 <div class="product-header">
   <div class="row">
-    <div class="col-3 pr-0">
+    <div class="col-4 pr-0">
       <% if @product.photos.attached? %>
         <%= cl_image_tag @product.photos.first.key, class: "w-100" %>
       <% else %>
         <img class="w-100" src="https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081" alt="">
       <% end %>
     </div>
-    <div class="col-9">
+    <div class="col-8">
       <div class="row p-3 bg-gray h-100">
         <div class="col-8 d-flex align-items-center">
           <p class="m-0"><%= @product.description %></p>
@@ -44,7 +44,7 @@
   </section>
 <% end %>-->
 <section class="bg-white p-4 my-4 round">
-  <h2>Last reviews</h2>
+  <h4>Last reviews</h4>
   <% if @product.productreviews.count == 0 %>
   <p>There are no reviews yet, be the first one!</p>
   <% end %>
@@ -71,13 +71,13 @@
 
 
 
-<h2 class="my-4">See other products from <%= @product.shop.name %></h2>
-<div class="bg-gray p-3">
+<h4 class="my-4">See other products from <%= @product.shop.name %></h4>
+<div class="bg-gray p-3 round">
   <div class="row">
     <% @product.shop.products.each do |product| %>
       <% unless product == @product %>
-        <div class="col-12 col-md-6 col-xl-4 mb-3">
-          <%= render 'products/product_card', product: product %>
+        <div class="col-12 col-md-6 col-xl-4">
+          <%= render 'products/other_product_card', product: product %>
         </div>
       <% end %>
     <% end %>

@@ -1,10 +1,11 @@
 .product-card {
   overflow: hidden;
   background: white;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  box-shadow: 0 0 15px rgba(0,0,0,0.05);
+  border-radius: 8px;
   transition: all ease 0.2s;
   &:hover {
-    transform: scale(1.05);
+    transform: scale(1.01);
   }
   a {
     color: $yellow;
@@ -16,7 +17,7 @@
 }
 
 .product-card img {
-  height: 275px;
+  height: 250px;
   width: 100%;
   object-fit: cover;
 }
@@ -41,3 +42,41 @@
   align-items: flex-start;
   position: relative;
 }
+
+.card-other-product {
+  overflow: hidden;
+  height: 120px;
+  background: white;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  transition: all ease 0.2s;
+  &:hover {
+    transform: scale(1.01);
+  }
+}
+
+.card-other-product img {
+  height: 100%;
+  width: 120px;
+  object-fit: cover;
+}
+
+.card-other-product h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.card-other-product p {
+  font-size: 12px;
+  line-height: 1.4;
+  opacity: .7;
+  margin-bottom: 0;
+  margin-top: 8px;
+}
+
+.card-other-product .card-other-product-infos {
+  padding: 16px;
+}
+
