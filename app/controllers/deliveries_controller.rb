@@ -2,14 +2,12 @@ class DeliveriesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    if current_user.admin
-      @deliveries = Delivery.all
-    elsif params[:lat].present? && current_user.roles.include?(User::ROLES[0])
-      @deliveries = @deliveries.near([params[:lat], params[:lng]], 25).where(status: 'pending')
-    elsif current_user.roles.include?(User::ROLES[0])
-      @deliveries = Delivery.where(vehicle_id: current_user.vehicle_id).where(status: 'pending')
+    if params[:lat].present? && current_user.roles.include?(User::ROLES[0])
+      @deliveries = @deliveries.near([params[:lat], params[:lng]], 25).where(status: 'pending_delivery_pickup')
+    else current_user.roles.include?(User::ROLES[0])
+         @deliveries = Delivery.order(:id).where(vehicle_id: current_user.vehicle_id).where(status: 'pending_delivery_pickup')
     end
-    @my_deliveries = Delivery.where('user_id = ? AND status != ?', current_user.id, 'delivered')
+    @my_deliveries = Delivery.order(:id).where('user_id = ? AND status != ?', current_user.id, 'delivered')
   end
 
   def show
@@ -33,7 +31,20 @@ class DeliveriesController < ApplicationController
     @delivery = Delivery.find(params[:id])
   end
 
+  def assign
+    delivery = Delivery.find(params[:id])
+    delivery.user = current_user
+    delivery.status = 'assigned'
+    delivery.save
+    redirect_to deliveries_path
+  end
 
+  def update_status
+    delivery = Delivery.find(params[:id])
+    delivery.update(status: params[:delivery][:status])
+
+    redirect_to deliveries_path
+  end
 
   private
 
