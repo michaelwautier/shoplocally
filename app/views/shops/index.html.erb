@@ -13,7 +13,12 @@
   </div>
   <div class="col-12 col-lg-6">
     <% unless @shops.empty? %>
-      <h2>Explore the shops around you</h2>
+      <div class="d-flex align-items-center">
+        <h2 class="mr-2">Explore the shops around you</h2>
+        <button id="geolocate_button" class="btn action-button">
+          <i class="fas fa-search-location"></i>
+        </button>
+      </div>
         <div id="map"
             style="width: 100%; height: 600px;"
             data-markers="<%= @markers.to_json %>"
@@ -58,4 +63,3 @@
     </div>
   <% end %>
 </div>
-<button id="geolocate_button">Geolocate me</button>
