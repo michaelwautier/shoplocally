@@ -23,41 +23,48 @@
 
 <h2>Deliveries from your shop:</h2>
 <% @deliveries.each do |delivery| %>
-<div class="card my-3">
-  <div class="card-header d-flex justify-content-between">
-  <h5 class="m-0"> Shop: <%= delivery.shop.name %></h5>
-  <p class="m-0">#SL00<%= delivery.order.id %></p>
-  </div>
-  <div class="card-body">
-
-    <% @cart_products = delivery.cart_products %>
-    <% render @cart_products %>
-
-    <div class="row mt-1">
-      <div class="col">
-        <h5 class="card-title"><strong>Status:</strong> <%= delivery.status %>
-          <%= simple_form_for delivery, remote: true do |f| %>
-            <%= f.input :status, collection: Delivery::STATUS.first(2) %>
-            <%= f.input :vehicle, collection: Vehicle::TYPES %>
-            <%= f.button :submit, class: "btn btn-primary" %>
-          <% end %>
-        </h5>
-      </div>
-      <div class="col">
-        <p class="card-text"><strong>Type of vehicle:</strong> <%= delivery.vehicle ? delivery.vehicle.type_name : 'Not yet specified' %></p>
-      </div>
+  <div class="card my-3">
+    <div class="order-header d-flex justify-content-between">
+      <h5 class="m-0">Shop: <%= delivery.shop.name %></h5>
+      <p class="m-0">#SL00<%= delivery.order.id %></p>
     </div>
+    <div class="card-body">
 
-    <div class="row">
-      <div class="col">
-        <p class="card-text"><strong>Shop address:</strong> <%= delivery.shop.address&.full_address %></p>
-      </div>
-        <div class="col">
-          <p class="card-text"><strong>Delivery address:</strong> <%= delivery.full_address %></P>
+      <% @cart_products = delivery.cart_products %>
+      <% render @cart_products %>
+
+      <div class="form-row">
+        <div class="col-5">
+          <h5 class="card-title"><strong>Status:</strong> <%= delivery.status %></h5>
+        </div>
+        <div class="col-5">
+          <h5 class="card-text"><strong>Type of vehicle:</strong> <%= delivery.vehicle ? delivery.vehicle.type_name : 'Not yet specified' %></h5>
         </div>
       </div>
+      <%= simple_form_for delivery, remote: true do |f| %>
+        <div class="form-row align-items-end">
+          <div class="col-5">
+            <%= f.input :status, collection: Delivery::STATUS.first(2) %>
+          </div>
+          <div class="col-5">
+            <%= f.input :vehicle, collection: Vehicle::TYPES, selected: delivery.vehicle&.type_name %>
+          </div>
+          <div class="col-2">
+            <%= f.button :submit, class: "btn btn-primary mb-3" %>
+          </div>
+        </div>
+      <% end %>
 
+      <div class="form-row">
+        <div class="col-5">
+          <h6 class="card-text"><strong>Shop address:</strong> <%= delivery.shop.address&.full_address %></h6>
+        </div>
+          <div class="col-7">
+            <h6 class="card-text"><strong>Delivery address:</strong> <%= delivery.full_address %></h6>
+          </div>
+        </div>
+
+    </div>
   </div>
-</div>
 <% end %>
 
