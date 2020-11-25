@@ -37,7 +37,7 @@
       <div class="col">
         <h5 class="card-title"><strong>Status:</strong> <%= delivery.status %>
           <%= simple_form_for delivery, remote: true do |f| %>
-            <%= f.input :status, collection: Delivery::STATUS %>
+            <%= f.input :status, collection: Delivery::STATUS, only: ["pending", "assigned"] %>
             <%= f.input :vehicle, collection: Vehicle::TYPES %>
             <%= f.button :submit, class: "btn btn-primary" %>
           <% end %>

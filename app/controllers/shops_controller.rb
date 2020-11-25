@@ -36,6 +36,7 @@ class ShopsController < ApplicationController
       postcode: params[:postcode],
       city: params[:city]
     )
+    current_user.add_role("owner")
     if @shop.save
       redirect_to shop_path(@shop)
     else
