@@ -17,6 +17,7 @@ class Product < ApplicationRecord
   validates :category, presence: true
 
   def self.import(file, shop)
+    require 'open-uri'
     CSV.foreach(file.path, headers: true) do |row|
       product_hash = Product.new
       product_hash.name = row[0]
@@ -26,6 +27,8 @@ class Product < ApplicationRecord
       product_hash.stock = row[4]
       product_hash.category = Category.find_by(name: row[5])
       product_hash.ean = row[6]
+      file = URI.open(row[7])
+      product_hash.photos.attach(io: file, filename: "#{row[0].split.first}.png", content_type: 'image/png')
       product_hash.shop = shop
       product_hash.save
     end
