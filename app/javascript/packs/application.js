@@ -38,9 +38,11 @@ document.addEventListener('turbolinks:load', () => {
     initStarRating();
 });
 
-navigator.geolocation.getCurrentPosition((data) => {
-  let params = `?lat=${data.coords.latitude}&&lng=${data.coords.longitude}`
-  Turbolinks.visit(window.location.pathname+params);
- });
+document.getElementById("geolocate_button").addEventListener("click", function(event) {
+  navigator.geolocation.getCurrentPosition((data) => {
+    let params = `?lat=${data.coords.latitude}&&lng=${data.coords.longitude}`
+    Turbolinks.visit(window.location.pathname+params);
+  });
+});
 
 import "controllers"
