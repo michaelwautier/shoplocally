@@ -10,19 +10,20 @@ class CartsController < ApplicationController
     @address = Address.new
   end
 
-  # should be called after succesfull payment, current cart > order
   def checkout_confirmation
-    if params[:use_user_address].present?
+    case params["address-selection"]
+    when 'user'
       @address = current_user.address
-    else
-      @address = Address.new(checkout_address_params)
-    end
-    if @address.save
-      current_user.update(address: @address) if params[:save_user_address].present?
       create_order(@address)
-    else
-      flash.now[:alert] = 'Please provide a shipping address'
-      render :checkout
+    when 'pickup' then create_order(nil)
+    when 'new'
+      @address = Address.new(checkout_address_params)
+      if @address.save
+        create_order(@address)
+      else
+        flash.now[:alert] = 'Please provide a shipping address'
+        render :checkout
+      end
     end
   end
 
@@ -49,8 +50,6 @@ class CartsController < ApplicationController
     order.status = 'Waiting for payment'
     if order.save
       cart.update(current_cart: false)
-      # TODO: redirect to orders/index for current user
-      # order_to_deliveries(@order)
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['bancontact', 'card'],
         line_items: stripe_line_items(order),
@@ -61,7 +60,7 @@ class CartsController < ApplicationController
       redirect_to order_path order
     else
       @address = Address.new
-      flash.now[:alert] = 'Oeps something went wrong order not created!'
+      flash.now[:alert] = 'Oops something went wrong order not created!'
       render :checkout
     end
   end

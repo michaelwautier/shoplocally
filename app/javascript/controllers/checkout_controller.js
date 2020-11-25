@@ -35,4 +35,24 @@ export default class extends Controller {
     currentStep--
     this.updateActiveStep()
   }
+
+  address(event) {
+    // console.log(event.target.id)
+    switch (event.target.id) {
+      case 'user-address':
+        document.getElementById('user-address-radio').checked = true
+        this.next()
+        break;
+      case 'pickup-address':
+        document.getElementById('pickup-address-radio').checked = true
+        this.next();
+        break;
+      case 'new-address':
+        document.getElementById('new-address-radio').checked = true
+        document.getElementById('address_street').focus()
+        break;
+      default:
+        break;
+    }
+  }
 }

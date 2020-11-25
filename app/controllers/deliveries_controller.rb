@@ -3,7 +3,7 @@ class DeliveriesController < ApplicationController
 
   def index
     if params[:lat].present? && current_user.roles.include?(User::ROLES[0])
-      @deliveries = @deliveries.near([params[:lat], params[:lng]], 25).where(status: 'pending_delivery_pickup')
+      @deliveries = @deliveries.near([params[:lat], params[:lng]], 75).where(status: 'pending_delivery_pickup')
     else
       current_user.roles.include?(User::ROLES[0])
       @deliveries = Delivery.order(:id).where(status: 'pending_delivery_pickup')
