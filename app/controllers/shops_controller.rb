@@ -61,8 +61,12 @@ class ShopsController < ApplicationController
   end
 
   def owner
-    @deliveries = Delivery.select do |delivery|
-      current_user.shops.ids.include?(delivery.shop_id)
+    if current_user.shops.empty?
+      redirect_to new_shop_path
+    else
+      @deliveries = Delivery.select do |delivery|
+        current_user.shops.ids.include?(delivery.shop_id)
+      end
     end
   end
 
