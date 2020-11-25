@@ -14,6 +14,11 @@ Rails.application.routes.draw do
   resources :orders, only: [:index, :show] do
     resources :deliveries, only: [:show]
   end
+
+  patch 'deliveries/:id/assign', to: 'deliveries#assign'
+  put 'deliveries/:id/assign', to: 'deliveries#assign'
+  patch '/deliveries/:id/status', to: 'deliveries#update_status'
+  put '/deliveries/:id/status', to: 'deliveries#update_status'
   
   resources :deliveries, only: [:index, :edit, :update]
 
