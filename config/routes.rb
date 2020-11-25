@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   
   resources :deliveries, only: [:index, :edit, :update]
 
-  # products by category
+  # search queries
   get 'search/', to: 'pages#search', as: 'search'
 
   # products by category
