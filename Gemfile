@@ -74,5 +74,3 @@ gem "money-rails", "~> 1.13"
 gem "stripe", "~> 5.28"
 
 gem "stripe_event", "~> 2.3"
-
-gem "stimulus_reflex", "~> 3.3"
