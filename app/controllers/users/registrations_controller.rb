@@ -21,12 +21,23 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
   def update
-    current_user.address.update(
-      street: params[:street],
-      number: params[:number],
-      postcode: params[:postcode],
-      city: params[:city]
-    )
+    if current_user.address.nil?
+      address = Address.create(
+        street: params[:street],
+        number: params[:number],
+        postcode: params[:postcode],
+        city: params[:city]
+      )
+      current_user.address = address
+      current_user.save
+    else
+      current_user.address.update(
+        street: params[:street],
+        number: params[:number],
+        postcode: params[:postcode],
+        city: params[:city]
+      )
+    end
     super
   end
 
