@@ -1,4 +1,4 @@
-<% if @products.empty? & @shops_name.empty? %>
+<% if @products.empty? & @shops_name.empty? & @shops.empty? %>
   <div class="d-flex flex-column align-items-center">
     <div class="w-50">
       <%= image_tag('search.svg', class: "w-100 my-5") %>
