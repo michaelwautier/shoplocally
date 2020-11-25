@@ -12,7 +12,7 @@
         <h5 class="card-title"><strong>Status:</strong> <%= @delivery.status %></h5>
       </div>
       <div class="col">
-        <p class="card-text"><strong>Type of vehicle:</strong> <%= @delivery.vehicle ? @delivery.vehicle.type : 'Not yet specified' %></p>
+        <p class="card-text"><strong>Type of vehicle:</strong> <%= @delivery.vehicle ? @delivery.vehicle.type_name : 'Not yet specified' %></p>
       </div>
     </div>
 
@@ -21,7 +21,7 @@
         <p class="card-text"><strong>Shop address:</strong> <%= @delivery.shop.address.full_address %></p>
       </div>
         <div class="col">
-          <p class="card-text"><strong>Delivery address:</strong> <%= @delivery.order.user.address.full_address %></P>
+          <p class="card-text"><strong>Delivery address:</strong> <%= @delivery.full_address %></P>
         </div>
       </div>
 
