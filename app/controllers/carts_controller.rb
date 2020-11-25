@@ -10,20 +10,33 @@ class CartsController < ApplicationController
     @address = Address.new
   end
 
-  # should be called after succesfull payment, current cart > order
   def checkout_confirmation
-    if params[:use_user_address].present?
+    case params["address-selection"]
+    when 'user'
       @address = current_user.address
-    else
-      @address = Address.new(checkout_address_params)
-    end
-    if @address.save
-      current_user.update(address: @address) if params[:save_user_address].present?
       create_order(@address)
-    else
-      flash.now[:alert] = 'Please provide a shipping address'
-      render :checkout
+    when 'pickup' then create_order(nil)
+    when 'new'
+      @address = Address.new(checkout_address_params)
+      if @address.save
+        create_order(@address)
+      else
+        flash.now[:alert] = 'Please provide a shipping address'
+        render :checkout
+      end
     end
+    # if params[:use_user_address].present?
+    #   @address = current_user.address
+    # else
+    #   @address = Address.new(checkout_address_params)
+    # end
+    # if @address.save
+    #   current_user.update(address: @address) if params[:save_user_address].present?
+    #   create_order(@address)
+    # else
+    #   flash.now[:alert] = 'Please provide a shipping address'
+    #   render :checkout
+    # end
   end
 
   def current_cart

@@ -16,6 +16,6 @@ class Delivery < ApplicationRecord
   end
 
   def full_address
-    order.address.full_address
+    order.address&.full_address
   end
 end

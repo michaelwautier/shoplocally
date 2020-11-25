@@ -15,13 +15,12 @@ Rails.application.routes.draw do
     resources :deliveries, only: [:show]
   end
 
+  # delivery updates by shop and delivery guy
   patch 'deliveries/:id/assign', to: 'deliveries#assign'
   put 'deliveries/:id/assign', to: 'deliveries#assign'
   patch '/deliveries/:id/status', to: 'deliveries#update_status'
   put '/deliveries/:id/status', to: 'deliveries#update_status'
   
-  resources :deliveries, only: [:index, :edit, :update]
-
   resources :deliveries, only: [:index, :edit, :update]
 
   # products by category
@@ -35,7 +34,6 @@ Rails.application.routes.draw do
   end
 
   get 'owner/', to: 'shops#owner', as: 'owner'
-
 
   # cart actions
   get 'cart/', to: 'carts#show', as: 'current_cart'
