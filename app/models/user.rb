@@ -24,7 +24,8 @@ class User < ApplicationRecord
     else
       current_roles = [role]
     end
-    update(roles: current_roles)
+    roles = current_roles
+    save(validate: false)
   end
 
   def remove_role(role)
