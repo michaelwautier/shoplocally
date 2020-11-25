@@ -1,6 +1,6 @@
 <% unless order.status == 'paid' %>
   <div class="w-75 mx-auto text-center my-1">
-    <h5 class="text-secondary" data-target="checkout.heading">Step 4 of 4</h5>
+    <h5 class="text-secondary" data-target="checkout.heading">Go to payment to complete your order</h5>
   </div>
   <div class="progress w-75 mx-auto">
     <div data-target="checkout.progress" class="progress-bar bg-warning w-75" role="progressbar"></div>
@@ -10,20 +10,20 @@
     <h5 class="text-secondary" data-target="checkout.heading">Completed</h5>
   </div>
   <div class="progress w-75 mx-auto">
-    <div data-target="checkout.progress" class="progress-bar bg-warning w-100" role="progressbar"></div>
+    <div data-target="checkout.progress" class="progress-bar bg-success w-100" role="progressbar"></div>
   </div>
 <% end %>
 
 <ul class="list-group list-group-flush border-bottom pb-3 my-3">
   <div class="order-header">
     <div class="row">
-      <div class="col-2">
+      <div class="col-3">
         <p class="m-0">Order n° : #SL00<%= order.id %></p>
       </div>
       <div class="col-4">
-        <p class="m-0">Status : <%= order.status %></p>
+        <p class="m-0">Status : <%= order.status.capitalize %></p>
       </div>
-      <div class="col-6">
+      <div class="col-5">
         <p class="m-0">Placed on : <%= order.created_at.strftime("%d/%m/%Y at %H:%M") %></p>
       </div>
     </div>    
@@ -37,7 +37,7 @@
           <p>Shop</p>
         </div>
         <div class="col-1 text-center font-weight-bold">
-          <p>Quantity</p>
+          <p>Qty</p>
         </div>
         <div class="col-2 font-weight-bold">
           <p>Unit Price</p>
@@ -82,14 +82,14 @@
           <p>Total: <%= humanized_money_with_symbol(total_price)%></p>
         </div>
       </div>
-      <div class="row border-bottom py-2 my-2">
-        <div class="col-5 font-weight-bold">Shop</div>
-        <div class="col-2 text-left font-weight-bold">Delivery status</div>
-      </div>
 
 
 <% if order.status == 'paid' %>
-<% order.deliveries.each do |delivery| %>
+  <% order.deliveries.each do |delivery| %>
+    <div class="row border-bottom py-2 my-2">
+      <div class="col-5 font-weight-bold">Shop</div>
+      <div class="col-2 text-left font-weight-bold">Delivery status</div>
+    </div>
     <div class="row text-right">
       <div class="col-5 text-left">
         <p> <%= link_to delivery.shop.name, shop_path(delivery.shop)  %> </p>
@@ -99,14 +99,14 @@
       </div>
     </div>
   <% end %>
-  </div>
-</ul>
-<% else %>
     </div>
   </ul>
+<% else %>
   <div class="d-flex justify-content-center">
     <button id="pay" class="btn btn-lg action-button px-5">Pay</button>
   </div>
+  </div>
+</ul>
   
   <script src="https://js.stripe.com/v3/"></script> 
   <script>
