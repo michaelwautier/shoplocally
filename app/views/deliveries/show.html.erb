@@ -21,7 +21,7 @@
         <p class="card-text"><strong>Shop address:</strong> <%= @delivery.shop.address.full_address %></p>
       </div>
         <div class="col">
-          <p class="card-text"><strong>Delivery address:</strong> <%= @delivery.full_address %></P>
+          <p class="card-text"><strong>Delivery address:</strong> <%= @delivery.full_address ? @delivery.full_address : 'Pickup in shop'%></P>
         </div>
       </div>
 
