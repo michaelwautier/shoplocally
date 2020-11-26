@@ -41,20 +41,21 @@
           <h5 class="card-text"><strong>Type of vehicle:</strong> <%= delivery.vehicle ? delivery.vehicle.type_name : 'Not yet specified' %></h5>
         </div>
       </div>
-      <%= simple_form_for delivery, remote: true do |f| %>
-        <div class="form-row align-items-end">
-          <div class="col-5">
-            <%= f.input :status, collection: Delivery::STATUS.first(2) %>
+      <% unless delivery.status == "delivered" %>
+        <%= simple_form_for delivery, remote: true do |f| %>
+          <div class="form-row align-items-end">
+            <div class="col-5">
+              <%= f.input :status, collection: Delivery::STATUS.first(2) %>
+            </div>
+            <div class="col-5">
+              <%= f.input :vehicle, collection: Vehicle::TYPES, selected: delivery.vehicle&.type_name %>
+            </div>
+            <div class="col-2">
+              <%= f.button :submit, class: "btn btn-primary mb-3" %>
+            </div>
           </div>
-          <div class="col-5">
-            <%= f.input :vehicle, collection: Vehicle::TYPES, selected: delivery.vehicle&.type_name %>
-          </div>
-          <div class="col-2">
-            <%= f.button :submit, class: "btn btn-primary mb-3" %>
-          </div>
-        </div>
+        <% end %>
       <% end %>
-
       <div class="form-row">
         <div class="col-5">
           <h6 class="card-text"><strong>Shop address:</strong> <%= delivery.shop.address&.full_address %></h6>
