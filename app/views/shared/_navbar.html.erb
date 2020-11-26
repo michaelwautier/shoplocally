@@ -1,16 +1,24 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <%= link_to "/", class: "navbar-brand" do %>
-    <%= image_tag 'logo-shoplocally.png', class: "logo" %>
-  <% end %>
+  <div class="dropdown show">
+    <a class="dropdown-toggle ml-3" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <%= image_tag 'logo-shoplocally.png', class: "logo" %>
+    </a>
+
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      <%= link_to  "Browse shops", shops_path, class: "dropdown-item" %>
+      <%= link_to  "Sell", owner_path, class: "dropdown-item" %>
+      <%= link_to  "Deliver", deliveries_path, class: "dropdown-item" %>
+    </div>
+  </div>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="d-flex align-items-center">
-    <div class="search-form-control">
-      <%= form_tag shops_path, id: "secret", class: "d-flex align-items-center", method: :get do %>
-        <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Products, shops, category"%>
+    <div id="search-bar" class="search-form-control">
+      <%= form_tag search_path, id: "secret", class: "d-flex align-items-center", method: :get do %>
+        <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Search products, shops, category"%>
         <%= button_tag(type: "submit", class: "btn btn-flat magnified-icon") do %>
         <i class="fas fa-search"></i>
         <% end %>
@@ -39,7 +47,8 @@
             <%= link_to "Dashboard", orders_path, class: "dropdown-item" %>
             <%= link_to "Owner page", owner_path, class: "dropdown-item" if current_user.roles&.include?("owner") %>
             <%= link_to "Update profile", edit_user_registration_path , class: "dropdown-item" %>
-            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+            <div class="dropdown-divider"></div>
+            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item text-danger" %>
           </div>
         </li>
       <% else %>

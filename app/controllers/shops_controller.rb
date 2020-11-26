@@ -1,13 +1,7 @@
 class ShopsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
   def index
-    if params[:query].present?
-      sql_query = "name ILIKE :query"
-      @shops = Shop.where(sql_query, query: "%#{params[:query]}%")
-      @products = Product.where(sql_query, query: "%#{params[:query]}%")
-    else
-      @shops = params[:lat].present? ? Shop.near([params[:lat], params[:lng]], 70) : Shop.all
-    end
+    @shops = params[:lat].present? ? Shop.near([params[:lat], params[:lng]], 70) : Shop.all
     @markers = @shops.map do |shop|
       {
         lat: shop.latitude,
