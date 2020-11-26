@@ -8,65 +8,62 @@
   </div>
 <% else %>
 
-  <h2>Shops named '<%= params[:query] %>'</h2>
-  <% if @shops_name.empty? %>
-    <p>No shops result for '<%= params[:query] %>'</p>
-  <% end %>
-  <div class="row">
-    <% @shops_name.each do |shop| %>
-      <div class="col-12 col-md-6 col-xl-4 mb-4">
-        <%= link_to shop_path(shop) do %>
-          <div class="card-shop">
-            <% if shop.logo.attached? %>
-              <%= cl_image_tag shop.logo.key, height: 150, width: 150, crop: :fill, class: "shop-logo" %>
-            <% elsif shop.pictures.attached? %>
-              <%= cl_image_tag shop.pictures.first.key, height: 150, width: 150, crop: :fill, class: "shop-picture" %>
-            <% end %>
-            <div class="card-shop-infos text-dark">
-              <h2><%= shop.name %></h2>
-              <p><%= shop.description.length > 40 ? "#{shop.description.first(40)} (...)" : shop.description %></p>
-              <p><%= shop.address.full_address %></p>
+  <% unless @shops_name.empty? %>
+    <h2>Shops named '<%= params[:query] %>'</h2>  
+    <div class="row">
+      <% @shops_name.each do |shop| %>
+        <div class="col-12 col-md-6 col-xl-4 mb-4">
+          <%= link_to shop_path(shop) do %>
+            <div class="card-shop">
+              <% if shop.logo.attached? %>
+                <%= cl_image_tag shop.logo.key, height: 150, width: 150, crop: :fill, class: "shop-logo" %>
+              <% elsif shop.pictures.attached? %>
+                <%= cl_image_tag shop.pictures.first.key, height: 150, width: 150, crop: :fill, class: "shop-picture" %>
+              <% end %>
+              <div class="card-shop-infos text-dark">
+                <h2><%= shop.name %></h2>
+                <p><%= shop.description.length > 40 ? "#{shop.description.first(40)} (...)" : shop.description %></p>
+                <p><%= shop.address.full_address %></p>
+              </div>
             </div>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 
-  <h2>Shops selling '<%= params[:query] %>'</h2>
-  <% if @shops.empty? %>
-    <p>No shops result for '<%= params[:query] %>'</p>
-  <% end %>
-  <div class="row">
-    <% @shops.each do |shop| %>
-      <div class="col-12 col-md-6 col-xl-4 mb-4">
-        <%= link_to shop_path(shop) do %>
-          <div class="card-shop">
-            <% if shop.logo.attached? %>
-              <%= cl_image_tag shop.logo.key, height: 150, width: 150, crop: :fill, class: "shop-logo" %>
-            <% elsif shop.pictures.attached? %>
-              <%= cl_image_tag shop.pictures.first.key, height: 150, width: 150, crop: :fill, class: "shop-picture" %>
-            <% end %>
-            <div class="card-shop-infos text-dark">
-              <h2><%= shop.name %></h2>
-              <p><%= shop.description.length > 40 ? "#{shop.description.first(40)} (...)" : shop.description %></p>
-              <p><%= shop.address.full_address %></p>
+  <% unless @shops.empty? %>
+    <h2>Shops selling '<%= params[:query] %>'</h2>
+    <div class="row">
+      <% @shops.each do |shop| %>
+        <div class="col-12 col-md-6 col-xl-4 mb-4">
+          <%= link_to shop_path(shop) do %>
+            <div class="card-shop">
+              <% if shop.logo.attached? %>
+                <%= cl_image_tag shop.logo.key, height: 150, width: 150, crop: :fill, class: "shop-logo" %>
+              <% elsif shop.pictures.attached? %>
+                <%= cl_image_tag shop.pictures.first.key, height: 150, width: 150, crop: :fill, class: "shop-picture" %>
+              <% end %>
+              <div class="card-shop-infos text-dark">
+                <h2><%= shop.name %></h2>
+                <p><%= shop.description.length > 40 ? "#{shop.description.first(40)} (...)" : shop.description %></p>
+                <p><%= shop.address.full_address %></p>
+              </div>
             </div>
-          </div>
-        <% end %>
-      </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+  <% unless @products.empty? %>
+    <h2>Products result for '<%= params[:query] %>'</h2>
+    <div class="row">
+    <% @products&.each do |product| %>
+        <div class="col-12 col-md-6 col-xl-4 mb-3">
+          <%= render 'products/product_card', product: product %>
+        </div>
     <% end %>
-  </div>
-  <h2>Products result for '<%= params[:query] %>'</h2>
-  <% if @products.empty? %>
-    <p>No products result for '<%= params[:query] %>'</p>
+    </div>
   <% end %>
-  <div class="row">
-  <% @products&.each do |product| %>
-      <div class="col-12 col-md-6 col-xl-4 mb-3">
-        <%= render 'products/product_card', product: product %>
-      </div>
-  <% end %>
-  </div>
 <% end %>
 
