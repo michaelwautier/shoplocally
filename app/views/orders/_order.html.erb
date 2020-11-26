@@ -119,4 +119,7 @@
     });
   </script>
 
+  <% if Rails.env.development? && order.status != 'paid' %>
+    <%= link_to 'Fake payment', "/orders/#{order.id}/fakepay", class:"btn btn-danger"%>
+  <% end %>
 <% end %>

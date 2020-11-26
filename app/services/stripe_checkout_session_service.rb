@@ -5,8 +5,6 @@ class StripeCheckoutSessionService
     order_to_deliveries(order)
   end
 
-  private
-
   def order_to_deliveries(order)
     shops = order.cart.cart_products.map { |line| line.product.shop }
     shops.uniq.each do |shop|

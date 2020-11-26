@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  mount RailsAdmin::Engine => 'admin', as: 'rails_admin'
   devise_for :users, controllers: { registrations: 'users/registrations' }
   root to: 'pages#home'
   resources :shops do
@@ -8,9 +8,11 @@ Rails.application.routes.draw do
     resources :delivery_options, only: [:index, :new, :create, :edit]
   end
 
-  mount StripeEvent::Engine, at: '/stripe-webhooks'
+  mount StripeEvent::Engine, at: 'stripe-webhooks'
 
   # orders and deliveries
+  get 'orders/:id/fakepay', to: 'orders#fake_payment' if Rails.env.development?
+
   resources :orders, only: [:index, :show] do
     resources :deliveries, only: [:show]
   end
@@ -18,8 +20,8 @@ Rails.application.routes.draw do
   # delivery updates by shop and delivery guy
   patch 'deliveries/:id/assign', to: 'deliveries#assign'
   put 'deliveries/:id/assign', to: 'deliveries#assign'
-  patch '/deliveries/:id/status', to: 'deliveries#update_status'
-  put '/deliveries/:id/status', to: 'deliveries#update_status'
+  patch 'deliveries/:id/status', to: 'deliveries#update_status'
+  put 'deliveries/:id/status', to: 'deliveries#update_status'
   
   resources :deliveries, only: [:index, :edit, :update]
 
@@ -47,4 +49,6 @@ Rails.application.routes.draw do
   resources :delivery_options, only: [:destroy, :update]
 
   resources :addresses
+
+  
 end
