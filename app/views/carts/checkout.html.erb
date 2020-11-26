@@ -70,16 +70,16 @@
       <% if current_user.address %>
         <div>
           <input type="radio" name="address-selection" id="user-address-radio" value="user">
-          <span id="user-address" data-action="click->checkout#address" class="btn action-button btn-sm mb-1"><%= current_user.address.full_address %></span>
+          <span id="user-address" data-action="click->checkout#address" class="btn btn-primary btn-sm mb-2"><%= current_user.address.full_address %></span>
         </div>
       <% end %>
       <div>
         <input type="radio" name="address-selection" id="pickup-address-radio" value="pickup">
-        <span id="pickup-address" data-action="click->checkout#address" class="btn action-button btn-sm mb-1">Pickup in store</span>
+        <span id="pickup-address" data-action="click->checkout#address" class="btn btn-primary btn-sm mb-2">Pickup in store</span>
       </div>
       <div>
         <input type="radio" name="address-selection" id="new-address-radio" value="new">
-        <span id="new-address" data-action="click->checkout#address" class="btn action-button btn-sm mb-1">New shipping address</span>
+        <span id="new-address" data-action="click->checkout#address" class="btn btn-primary btn-sm mb-2">New shipping address</span>
       </div>
            
       <hr>
