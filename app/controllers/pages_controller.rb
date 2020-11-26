@@ -4,7 +4,8 @@ class PagesController < ApplicationController
 
   def search
     sql_query = "name ILIKE :query OR description ILIKE :query"
-    @shops_name = Shop.where(sql_query, query: "%#{params[:query]}%")
+    sql_query_name = "name ILIKE :query"
+    @shops_name = Shop.where(sql_query_name, query: "%#{params[:query]}%")
     @products = Product.where(sql_query, query: "%#{params[:query]}%")
     @shops = []
     @products.each do |product|

@@ -42,6 +42,14 @@
         </div>
       </div>      
     <% end %>
+
+    <% if request.path == '/search' %>
+      <div class="search-banner w-100" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(<%= cl_image_path("search") %>);background-size: cover;background-position: center;">
+        <div class="container">
+          <h1 class="text-white">Results for '<%= params[:query] %>'</h1>
+        </div>
+      </div>      
+    <% end %>
     <div class="container my-4 flex-grow-1">
       <%= yield %>
     </div>
