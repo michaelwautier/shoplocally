@@ -14,7 +14,7 @@ class ShopreviewsController < ApplicationController
       redirect_to shop_path(@shop)
     else
       flash[:alert] = "Something went wrong."
-      render :new
+      render 'shops/show'
     end
   end
 
