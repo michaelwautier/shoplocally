@@ -58,7 +58,7 @@ class ShopsController < ApplicationController
     if current_user.shops.empty?
       redirect_to new_shop_path
     else
-      @deliveries = Delivery.select do |delivery|
+      @deliveries = Delivery.order(id: :desc).select do |delivery|
         current_user.shops.ids.include?(delivery.shop_id)
       end
     end
