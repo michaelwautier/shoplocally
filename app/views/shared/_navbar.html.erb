@@ -44,7 +44,7 @@
             <img class="avatar dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="<%=asset_path 'noavatar.png' %>" />
           <%end%>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <%= link_to "Dashboard", orders_path, class: "dropdown-item" %>
+            <%= link_to "Orders", orders_path, class: "dropdown-item" %>
             <%= link_to "Owner page", owner_path, class: "dropdown-item" if current_user.roles&.include?("owner") %>
             <%= link_to "Update profile", edit_user_registration_path , class: "dropdown-item" %>
             <div class="dropdown-divider"></div>
