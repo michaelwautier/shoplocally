@@ -1,3 +1,11 @@
+<div class="d-flex justify-content-between align-items-center">
+  <div>
+    <h1>Deliveries</h1>
+    <h3 class="text-warning font-weight-bold">Bring the orders to your neighbors</h3>
+  </div>
+  <%= image_tag("delivery.svg", class: "delivery-illustration") %>
+</div>
+
 <h2>My deliveries</h2>
 <% @my_deliveries.each do |delivery| %>
   <div class="card my-3">
