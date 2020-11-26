@@ -1,3 +1,9 @@
 <h1>Order details</h1>
 
+<% if @order.status == "paid" %>
+  <div class="w-50 my-5 mx-auto">
+    <%= image_tag("order_completed.svg", class: "w-100") %>
+  </div>
+<% end %>
+
 <%= render 'orders/order', order: @order %>
