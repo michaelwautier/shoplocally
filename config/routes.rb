@@ -23,6 +23,9 @@ Rails.application.routes.draw do
   
   resources :deliveries, only: [:index, :edit, :update]
 
+  # search queries
+  get 'search/', to: 'pages#search', as: 'search'
+
   # products by category
   get 'categories/:id', to: 'categories#show'
 
