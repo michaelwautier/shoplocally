@@ -21,7 +21,11 @@
         <p class="m-0">Order n° : #SL00<%= order.id %></p>
       </div>
       <div class="col-4">
-        <p class="m-0">Status : <%= order.status.capitalize %></p>
+        <% if order.status == 'paid' %>
+          <p class="m-0">Status : <%= order.status.capitalize %> <i class="far fa-check-square ml-2 text-success"></i></p>
+        <% else %>
+          <p class="m-0">Status : <%= order.status.capitalize %></p>
+        <% end %>
       </div>
       <div class="col-5">
         <p class="m-0">Placed on : <%= order.created_at.strftime("%d/%m/%Y at %H:%M") %></p>
