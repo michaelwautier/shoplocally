@@ -32,8 +32,8 @@ Rails.application.routes.draw do
   get 'categories/:id', to: 'categories#show'
 
   # shop independent product actions
-  post 'products/:id', to: 'products#add_to_cart', as: 'add_to_cart'
-  delete 'products/:id', to: 'products#remove_from_cart', as: 'remove_from_cart'
+  post 'cart_products/:id', to: 'products#add_to_cart', as: 'add_to_cart'
+  delete 'cart_products/:id', to: 'products#remove_from_cart', as: 'remove_from_cart'
   resources :products, only: [:destroy, :update] do
     resources :productreviews
   end
