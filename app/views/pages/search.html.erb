@@ -8,18 +8,6 @@
   </div>
 <% else %>
 
-<h2>Products result for '<%= params[:query] %>'</h2>
-<% if @products.empty? %>
-  <p>No products result for '<%= params[:query] %>'</p>
-<% end %>
-<div class="row">
-<% @products&.each do |product| %>
-    <div class="col-12 col-md-6 col-xl-4 mb-3">
-      <%= render 'products/product_card', product: product %>
-    </div>
-<% end %>
-</div>
-
 <h2>Shops named '<%= params[:query] %>'</h2>
 <% if @shops_name.empty? %>
   <p>No shops result for '<%= params[:query] %>'</p>
@@ -70,3 +58,15 @@
   <% end %>
 </div>
 <% end %>
+
+<h2>Products result for '<%= params[:query] %>'</h2>
+<% if @products.empty? %>
+  <p>No products result for '<%= params[:query] %>'</p>
+<% end %>
+<div class="row">
+<% @products&.each do |product| %>
+    <div class="col-12 col-md-6 col-xl-4 mb-3">
+      <%= render 'products/product_card', product: product %>
+    </div>
+<% end %>
+</div>
