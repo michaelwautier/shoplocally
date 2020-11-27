@@ -6,3 +6,6 @@ In the lockdown to come, small businesses lose customers who turn to big corpora
 
 Solution:
 A website/app similar to Amazon, gathering shops and entrepeneurs by cities to be able to shop locally.
+
+Visit here :
+www.shoplocally.xyz
