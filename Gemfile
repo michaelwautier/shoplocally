@@ -73,3 +73,7 @@ gem "money-rails", "~> 1.13"
 gem "stripe", "~> 5.28"
 
 gem "stripe_event", "~> 2.3"
+
+gem 'rspec', '~> 3.10'
+
+gem 'rspec-rails', '~> 4.0', '>= 4.0.1'
