@@ -42,6 +42,7 @@ group :development, :test do
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'rspec-rails', '~> 4.0', '>= 4.0.1'
 end
 
 group :development do
@@ -73,7 +74,3 @@ gem "money-rails", "~> 1.13"
 gem "stripe", "~> 5.28"
 
 gem "stripe_event", "~> 2.3"
-
-gem 'rspec', '~> 3.10'
-
-gem 'rspec-rails', '~> 4.0', '>= 4.0.1'
