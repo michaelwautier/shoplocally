@@ -1,56 +1,52 @@
 require 'rails_helper'
 
 RSpec.describe Productreview, :type => :model do
-  let(:valid_attributes) do
-    {
-      content: "Nice product",
-      rating: 5,
-      user_id: user.id,
-      product_id: product.id
-    }
-  end
-
-  let(:user) do
-    User.create!(
+  before(:all) do
+    @user = User.create!(
       email: "test@rspec.be",
       password: "123456"
     )
-  end
-
-  let(:address) do
-    Address.create!(
+    @address = Address.create!(
       street: "Rue Laurent Delvaux",
       number: "39",
       postcode: "1400",
       city: "Nivelles"
     )
-  end
-
-  let(:shop) do
-    Shop.create!(
+    @shop = Shop.create!(
       name: "Shop Test",
       description: "Shop 1 - Test description for test shop",
       vat_number: "BE1234567891",
-      address_id: address.id,
-      user_id: user.id
+      address_id: @address.id,
+      user_id: @user.id
     )
-  end
-
-  let(:category) do
-    Category.create!(name: "food")
-  end
-
-  let(:product) do
-    Product.create!(
+    @category = Category.create!(name: "food")
+    @product = Product.create!(
       name: "Product Test",
       description: "Product 1 - Test description for test product",
       price_cents: 2000,
       ean: "123456789",
       stock: 3,
       tax: 21,
-      shop_id: shop.id,
-      category_id: category.id
+      shop_id: @shop.id,
+      category_id: @category.id
     )
+  end
+
+  after(:all) do
+    Productreview.destroy_all
+    Product.destroy_all
+    Shop.destroy_all
+    Address.destroy_all
+    User.destroy_all
+  end
+
+  let(:valid_attributes) do
+    {
+      content: "Nice product",
+      rating: 5,
+      user_id: @user.id,
+      product_id: @product.id
+    }
   end
 
   let(:product_review) do
@@ -121,13 +117,13 @@ RSpec.describe Productreview, :type => :model do
 
   describe '#user' do
     it 'should return the user who wrote the review' do
-      expect(product_review.user).to eq(user)
+      expect(product_review.user).to eq(@user)
     end
   end
 
   describe '#product' do
     it 'should return the product of the review' do
-      expect(product_review.product).to eq(product)
+      expect(product_review.product).to eq(@product)
     end
   end
 end
