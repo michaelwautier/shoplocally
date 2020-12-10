@@ -1,5 +1,4 @@
 class ShopreviewsController < ApplicationController
-
   def new
     @shopreview = Shopreview.new
     @shop = Shop.find(params[:shop_id])

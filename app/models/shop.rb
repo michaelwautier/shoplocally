@@ -18,7 +18,7 @@ class Shop < ApplicationRecord
   # validates :vat_validation
 
   def shop_address
-    self.address.full_address
+    address.full_address
   end
 
   private
