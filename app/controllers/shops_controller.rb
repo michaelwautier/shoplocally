@@ -1,5 +1,6 @@
 class ShopsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
+
   def index
     @shops = params[:lat].present? ? Shop.near([params[:lat], params[:lng]], 70) : Shop.all
     @markers = @shops.map do |shop|
