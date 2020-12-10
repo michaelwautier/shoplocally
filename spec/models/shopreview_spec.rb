@@ -1,42 +1,39 @@
 require 'rails_helper'
 
 RSpec.describe Shopreview, :type => :model do
-  before(:all) do
-    @user = User.create!(
+  let(:valid_attributes) do
+    {
+      content: "Nice shop",
+      rating: 5,
+      user_id: user.id,
+      shop_id: shop.id
+    }
+  end
+
+  let(:user) do
+    User.create!(
       email: "test@rspec.be",
       password: "123456"
     )
+  end
 
-    @address = Address.create!(
+  let(:address) do
+    Address.create!(
       street: "Rue Laurent Delvaux",
       number: "39",
       postcode: "1400",
       city: "Nivelles"
     )
+  end
 
-    @shop = Shop.create!(
+  let(:shop) do
+    Shop.create!(
       name: "Shop Test",
       description: "Shop 1 - Test description for test shop",
       vat_number: "BE1234567891",
-      address_id: @address.id,
-      user_id: @user.id
+      address_id: address.id,
+      user_id: user.id
     )
-  end
-
-  after(:all) do
-    Shopreview.destroy_all
-    Shop.destroy_all
-    Address.destroy_all
-    User.destroy_all
-  end
-
-  let(:valid_attributes) do
-    {
-      content: "Nice shop",
-      rating: 5,
-      user_id: @user.id,
-      shop_id: @shop.id
-    }
   end
 
   let(:shop_review) do
@@ -107,13 +104,13 @@ RSpec.describe Shopreview, :type => :model do
 
   describe '#user' do
     it 'should return the user who wrote the review' do
-      expect(shop_review.user).to eq(@user)
+      expect(shop_review.user).to eq(user)
     end
   end
 
   describe '#shop' do
     it 'should return the shop of the review' do
-      expect(shop_review.shop).to eq(@shop)
+      expect(shop_review.shop).to eq(shop)
     end
   end
 end
