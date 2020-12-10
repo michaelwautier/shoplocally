@@ -26,3 +26,24 @@ Product.all.each do |product|
   product.update(price_cents: product.price_in_cents )
   puts ("price_in_cents = #{product.price_in_cents} | price_cents = #{product.price_cents}")
 end
+
+User.all.each do |user|
+  address = Address.create(street: 'Rue Laurent Delvaux', number: user.id, postcode: '1400', city: 'Nivelles')
+  shop = Shop.create(
+    name: "Shop of user #{user.id}",
+    description: "Description of shop user #{user.id}",
+    address_id: address.id,
+    user_id: user.id,
+    vat_number: "BE1234567890"
+  )
+  product = Product.create(
+    name: "Product of shop ##{shop.id}",
+    description: "Product 1 - Test description for test product",
+    price_cents: 2000,
+    ean: "123456789",
+    stock: 3,
+    tax: 21,
+    shop_id: shop.id,
+    category_id: 1
+  )
+end
